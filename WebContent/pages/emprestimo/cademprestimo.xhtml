@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="../template/_template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+
+	<ui:define name="conteudo">
+		<h:form id="formedit" prependId="false">
+			<p:messages id="message_erro" severity="error" autoUpdate="true" closable="true" />
+	   	    <p:growl id="message_info" severity="info, warn" autoUpdate="true"/>
+	   	    <div id="barratitulo">
+	   	    	Empréstimo
+	   	    </div>
+	   	    <div id="formcadastro">
+	   	    	<p:fieldset style="background-color: #7D7B7B !important;" collapsed="#{emprestimoView.bloqSelecao}">
+	   	    		<p:panelGrid id="panelSelecao">
+   	    				<p:row>
+	   	    				<p:column>
+						        <p:selectOneMenu id="tipoFiltro" value="#{emprestimoView.tipoFiltro}" style="width:125px">
+						            <f:selectItem itemLabel="Nome" itemValue="NM" />
+ 						            <f:selectItem itemLabel="Matrícula" itemValue="MT" />
+						            <f:selectItem itemLabel="ID" itemValue="ID" />
+					                <p:ajax event="change" update="@all" listener="#{emprestimoView.validaTipoFiltro}"/>
+						        </p:selectOneMenu>
+	   	    				</p:column>
+	   	    				<p:column>
+	   	    				    <p:autoComplete id="pesqMatricula" value="#{emprestimoView.pesqMatricula}" rendered="#{emprestimoView.renderMatricula}"  completeMethod="#{emprestimoView.pesquisaSelecaoMatricula}"
+	   	    				    var="usuamatr" itemLabel="#{usuamatr.usua_nm_usuario}" itemValue="#{usuamatr}" converter="usuarioConverter"  forceSelection="true" style="margin-left: -20px;">
+						            <p:ajax event="itemSelect" listener="#{emprestimoView.onItemSelect}" update="@form" />
+						        </p:autoComplete>
+	   	    				    <p:autoComplete id="pesqNome" value="#{emprestimoView.pesqNome}" rendered="#{emprestimoView.renderNome}" completeMethod="#{emprestimoView.pesquisaSelecaoNome}"
+	   	    				    var="usuanome" itemLabel="#{usuanome.usua_nm_usuario}" itemValue="#{usuanome}" converter="usuarioConverter"  forceSelection="true" style="margin-left: -20px;">
+						            <p:ajax event="itemSelect" listener="#{emprestimoView.onItemSelect}" update="@form" />
+						        </p:autoComplete>
+	   	    				    <p:autoComplete id="pesqID" value="#{emprestimoView.pesqId}" rendered="#{emprestimoView.renderId}" completeMethod="#{emprestimoView.pesquisaSelecaoId}"
+	   	    				    var="usuaid" itemLabel="#{usuaid.usua_nm_usuario}" itemValue="#{usuaid}" converter="usuarioConverter"  forceSelection="true" style="margin-left: -20px;">
+						            <p:ajax event="itemSelect" listener="#{emprestimoView.onItemSelect}" update="@form" />
+						        </p:autoComplete>
+	   	    				</p:column>
+	   	    				<p:column style="text-align: right;">
+	   	    					<p:outputLabel value="Registro: " for="regselecao" style="color: #fff;"/>
+	   	    				</p:column>
+	   	    				<p:column>
+	   	    					<p:inputText id="regselecao" value="#{emprestimoView.codDocumentoSel}" maxlength="12" style="width:100px; margin-left: -20px;">
+	   	    					</p:inputText>
+	   	    				</p:column>
+	   	    				<p:column>
+	   	    					<p:commandLink id="buscaEmpr"  action="#{emprestimoView.buscaEmprestimo}" update="@form">
+									<button>
+										<h:graphicImage library="img" name="ico_lupa.jpg" title="Localizar empréstimo"/>
+	   	    						</button>
+								</p:commandLink>		   	    					
+	   	    				</p:column>
+	   	    			</p:row>
+	   	    		</p:panelGrid>
+	   	    	</p:fieldset>
+	   	    	<p:fieldset style="background-color: #7D7B7B !important; margin-top: 10px;">
+	   	    		<p:panelGrid id="panelUsuario">
+   	    				<p:row >
+							<p:column rowspan="4">
+	   	    					<h:outputLink value="">
+									<h:graphicImage value="/resources/img/#{emprestimoView.usuarioEmprestimo.usua_tx_foto}" style="border: 5px solid #ffffff; width: 85px; height: 97px;" />
+								</h:outputLink>
+							</p:column>   	    					
+							<p:column style="width: 400px;">
+	   	    					<p:outputLabel value="ID: #{emprestimoView.usuarioEmprestimo.id}"  style="color: #fff;"/>
+							</p:column>   	    					
+	   	    				<p:column rowspan="2">
+	   	    					<p:commandLink id="btnUsuario_1" action="#{emprestimoView.trocarUsuario}" update="@form">
+									<button>
+										<h:graphicImage library="img" name="ico_troca.jpg" title="Trocar usuário"/>
+	   	    						</button>
+								</p:commandLink>		   	    					
+	   	    				</p:column>
+	   	    				<p:column rowspan="2">
+	   	    					<p:commandLink id="btnUsuario_2" action="#{emprestimoView.comentar}" update="@form">
+									<button>
+										<h:graphicImage library="img" name="ico_nota.jpg" title="Comentar"/>
+	   	    						</button>
+								</p:commandLink>		   	    					
+	   	    				</p:column>
+	   	    				<p:column rowspan="2">
+	   	    					<p:commandLink id="btnUsuario_3" action="#{emprestimoView.enviarEmail}" update="@form">
+									<button>
+										<h:graphicImage library="img" name="ico_chk_email.jpg" title="Finalizar com email"/>
+	   	    						</button>
+								</p:commandLink>		   	    					
+	   	    				</p:column>
+	   	    				<p:column rowspan="2">
+	   	    					<p:commandLink id="btnUsuario_4" ajax="false" action="#{emprestimoView.geraBoleto}" update="@form">
+									<button>
+										<h:graphicImage library="img" name="ico_chk_boleta.jpg" title="Finalizar com boleto" />
+	   	    						</button>
+								</p:commandLink>		   	    					
+	   	    				</p:column>
+	   	    				<p:column rowspan="2">
+	   	    					<p:commandLink id="btnUsuario_5" action="#{emprestimoView.listaOcorrencias}" update="@form dlg_Ocorrencia">
+									<button>
+										<h:graphicImage library="img" name="ico_ocorr.jpg" title="Ocorrências" />
+	   	    						</button>
+								</p:commandLink>		   	    					
+	   	    				</p:column>
+	   	    				<p:column rowspan="2">
+	   	    					<p:commandLink id="btnUsuario_6" action="#{usuarioView.listaUsuarios()}">
+									<button>
+										<h:graphicImage library="img" name="ico_user.jpg" title="Editar usuário" />
+	   	    						</button>
+								</p:commandLink>		   	    					
+	   	    				</p:column>
+	   	    			</p:row>
+	   	    			<p:row>
+							<p:column>
+	   	    					<p:outputLabel value="Nome: #{emprestimoView.usuarioEmprestimo.usua_nm_usuario}"  style="color: #fff;"/>
+							</p:column>   	    					
+	   	    			</p:row>
+	   	    			<p:row>
+							<p:column>
+	   	    					<p:outputLabel value="Matrícula:  #{emprestimoView.usuarioEmprestimo.usua_cd_matricula}"  style="color: #fff;"/>
+							</p:column>   	    					
+							<p:column colspan="6">
+	   	    					<p:outputLabel value="Mensagem: #{emprestimoView.mensagem}"  style="color: #fff;"/>
+							</p:column>   	    					
+	   	    			</p:row>
+	   	    		</p:panelGrid>
+	   	    	</p:fieldset>
+	   	    	<p:fieldset style="background-color: #fff !important; margin-top: 10px;" collapsed="#{emprestimoView.bloqRegistro}">
+	   	    		<p:panelGrid id="panelRegistro">
+   	    				<p:row>
+   	    					<p:column style="width: 10px;">
+   	    						<p:spacer/>
+   	    					</p:column>
+   	    					<p:column style="width: 100px; text-align: right;">
+	   	    					<p:outputLabel value="Registro: " for="registro" style="color: #000;"/>
+   	    					</p:column>
+	   	    				<p:column>
+	   	    					<p:inputText id="registro" value="#{emprestimoView.codEmprestimoReg}" maxlength="12" style="width:100px; margin-left: -20px;"/>
+	   	    				</p:column>
+	   	    				<p:column>
+					            <p:selectOneMenu id="tipoEmprestimo" value="#{emprestimoView.tipoEmprestimo}" style="width:125px">
+					                <f:selectItems var="item" value="#{commonsView.tipoEmprestimos}" itemLabel="#{item.nome}" itemValue="#{item}" />
+					                <p:ajax event="change" update="dataDevolucao" listener="#{emprestimoView.liberarDataDevolucao}"/>
+					            </p:selectOneMenu>	
+	   	    				</p:column>
+	   	    				<p:column style="width: 150px; text-align: right;">
+	   	    					<p:outputLabel value="Data devolução: " for="dataDevolucao" style="color: #000;"/>
+	   	    				</p:column>
+	   	    				<p:column>
+								<p:calendar id="dataDevolucao" size="12" disabled="#{emprestimoView.bloqDtDevolucao}" mindate="01/01/2000" maxdate="31/12/2099" locale="pt_BR" pattern="dd/MM/yyyy" value="#{emprestimoView.datPrevDevolucao}" style="margin-left: -22px;"/>
+	   	    				</p:column>
+	   	    				<p:column>
+					            <p:commandButton value="Executar" icon="ui-icon-gear" action="#{emprestimoView.adicionarEmprestimo}" update="panelRegistro tbEmprestimo"/>
+	   	    				</p:column>
+	   	    			</p:row>
+	   	    		</p:panelGrid>
+	   	    	</p:fieldset>
+			    <p:toolbar style="margin-top: 10px;">
+			        <f:facet name="left">
+			            <p:commandButton value="Devolver" action="#{emprestimoView.devolverDocumento}" icon="ui-icon-arrowreturn-1-w" update="tbEmprestimo">
+			            </p:commandButton>
+			            <span class="ui-separator">
+			                <span class="ui-icon ui-icon-grip-dotted-vertical" />
+			            </span>
+			            <p:commandButton value="Excluir" action="#{emprestimoView.excluir}" icon="ui-icon-trash" update="tbEmprestimo">
+						    <p:confirm  header="Confirmação"  message="Deseja excluir este registro?"  icon="ui-icon-alert"/>
+    					</p:commandButton>
+    					<p:confirmDialog global="true" >
+						       <p:commandButton value="Sim"  type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+						       <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+					    </p:confirmDialog> 
+					</f:facet>
+			 
+			        <f:facet name="right">
+			            <p:commandButton value="Renovar" action="#{emprestimoView.renovar}" icon="ui-icon-refresh" update="tbEmprestimo">
+			            	<p:confirm  header="Confirmação"  message="Confirma a renovação do empréstimo selecionado?"  icon="ui-icon-alert"/>
+			            </p:commandButton>
+			        </f:facet>
+			 
+			    </p:toolbar>
+			    <p:dataTable id="tbEmprestimo" var="empr" value="#{emprestimoView.emprestimos}" selectionMode="single" selection="#{emprestimoView.emprestimo}" rowKey="#{empr.id}" rows="10" emptyMessage="Nenhum documento emprestado." >
+			        <p:column headerText="Unidade" style="width: 15%; text-align: center;">	
+			            <h:outputText value="#{empr.objUsuarioEmprestimo.objUnidade.unid_nm_unidade}" />
+			        </p:column>
+			        <p:column headerText="Registro" style="width: 12%; text-align: center;">
+			            <h:outputText value="#{empr.objAcervo.acer_nr_codbarras}"/>
+			        </p:column>
+			        <p:column headerText="Chamada" style="width: 10%; text-align: center;">
+			            <h:outputText value="#{empr.objAcervo.objClasse.clas_cd_classe}"/>
+			        </p:column>
+			        <p:column headerText="Título">
+			            <h:outputText value="#{empr.objAcervo.acer_ds_assunto}"/>
+			        </p:column>
+			        <p:column headerText="Dt. Prv. Devolução" style="width: 10%; text-align: center;">
+			            <h:outputText value="#{empr.empr_dt_prev_devolucao}">
+			            	<f:convertDateTime pattern="dd/MM/yyyy" locale="pt" />
+			            </h:outputText>
+			        </p:column>
+			        <p:column headerText="Renovação" style="width: 10%; text-align: center;">
+			            <h:outputText value="#{empr.empr_dt_renovacao}">
+			            	<f:convertDateTime pattern="dd/MM/yyyy" locale="pt" />
+			            </h:outputText>
+			        </p:column>
+			        <p:column headerText="Tipo" style="width: 5%; text-align: center;">
+			            <h:outputText value="#{empr.empr_tp_emprestimo}"/>
+			        </p:column>
+			    </p:dataTable>	   	   
+	   	    	<p:commandButton styleClass="padrao_btn" process="@this" update="@form" immediate="true" value="Voltar" action="#{emprestimoView.retorna()}" style="margin-top: 10px;"/>
+		   	</div>
+		</h:form>
+		<p:dialog header="Comentário" resizable="false" draggable="false" width="650" position="center" height="180" widgetVar="popUpComentario" modal="true" minHeight="40">
+    		<ui:include src="popUpComentario.xhtml"></ui:include>
+		</p:dialog>
+		<p:dialog id="dlg_Ocorrencia" header="Ocorrência" resizable="false" draggable="false" width="900" position="center" widgetVar="popUpOcorrencia" modal="true" minHeight="40">
+    		<ui:include src="popUpOcorrencia.xhtml"></ui:include>
+		</p:dialog>
+		<!-- DIALOGO DE PROCESSAMENTO -->
+		<p:ajaxStatus onstart="PF('statusDialog').show();" onsuccess="PF('statusDialog').hide();" />
+		<p:dialog styleClass="dialogo" modal="true" widgetVar="statusDialog" draggable="false" resizable="false" closable="false" showHeader="false">
+			<h:graphicImage library="img" name="ajax-loader.gif"/>
+		</p:dialog>
+	</ui:define>
+</ui:composition>

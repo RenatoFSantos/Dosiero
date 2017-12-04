@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="../template/_template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+
+	<ui:define name="conteudo">
+		<h:form id="formedit">
+			<p:messages id="message_erro" severity="error" autoUpdate="true" closable="true" />
+	   	    <p:growl id="message_info" severity="info, warn" autoUpdate="true"/>
+	   	    <div id="barratitulo">
+	   	    	Cadastro de Cliente
+	   	    </div>
+	   	    <div id="formcadastro">
+	   	    	<p:fieldset>
+	   	    		<div>
+					    <div>
+					        <div class="lbl_col larg150">
+					        	<p:outputLabel styleClass="padrao_lbl14 larg150" value="ID:"/>
+					        </div>
+					        <div class="txt_col larg320">
+								<p:inputText styleClass="padrao_txt larg100" id="clie_sq_id" readonly="true" disabled="true" value="#{clienteView.cliente.id}"/>
+					        </div>
+					        <div class="lbl_col larg150">
+								<p:outputLabel styleClass="padrao_lbl14 larg150" value="CNPJ " for="clie_cd_cnpj"/>
+					        </div>
+					        <div class="txt_col center larg260">
+					        	<p:focus for="clie_cd_cnpj"/>
+								<p:inputMask  mask="99.999.999/9999-99" styleClass="padrao_txt center larg260"  id="clie_cd_cnpj" value="#{clienteView.cliente.clie_cd_cnpj}" required="true" requiredMessage="CNPJ obrigatório!"/>							
+					        </div>
+					    </div>
+					    <div>
+					        <div class="lbl_col larg150">
+								<p:outputLabel styleClass="padrao_lbl14 larg150" value="Razão Social: " for="clie_nm_razaosocial"/>
+					        </div>
+					        <div class="txt_col larg730">
+								<p:inputText styleClass="padrao_txt larg730" id="clie_nm_razaosocial" value="#{clienteView.cliente.clie_nm_razaosocial}" required="true" requiredMessage="Razão Social obrigatória!"/>
+					        </div>
+					    </div>
+					    <div>
+					        <div class="lbl_col larg150">
+								<p:outputLabel styleClass="padrao_lbl14 larg150" value="Nome Fantasia: " for="clie_nm_fantasia"/>
+					        </div>
+					        <div class="txt_col larg730">
+								<p:inputText styleClass="padrao_txt larg730" id="clie_nm_fantasia" value="#{clienteView.cliente.clie_nm_fantasia}" required="true" requiredMessage="Nome fantasia obrigatório!"/>
+					        </div>
+					    </div>
+					    <div>
+					        <div class="lbl_col larg150">
+								<p:outputLabel styleClass="padrao_lbl14 larg150" value="Inscr. Estadual: " for="clie_cd_inscrestadual"/>
+					        </div>
+					        <div class="txt_col larg320">
+								<p:inputText styleClass="padrao_txt larg320" id="clie_cd_inscrestadual" value="#{clienteView.cliente.clie_cd_inscrestadual}"/>
+					        </div>
+					        <div class="lbl_col larg136">
+								<p:outputLabel styleClass="padrao_lbl14 larg136" value="Inscr. Municipal: " for="clie_cd_inscrmunicipal"/>
+					        </div>
+					        <div class="txt_col larg260">
+								<p:inputText styleClass="padrao_txt larg260" id="clie_cd_inscrmunicipal" value="#{clienteView.cliente.clie_cd_inscrmunicipal}"/>
+					        </div>
+					    </div>
+					    <div>
+					        <div class="lbl_col larg150">
+								<p:outputLabel styleClass="padrao_lbl14 larg150" value="Endereço: " for="clie_ds_endereco"/>
+					        </div>
+					        <div class="txt_col larg580">
+								<p:inputText styleClass="padrao_txt larg580" id="clie_ds_endereco" value="#{clienteView.cliente.clie_ds_endereco}"/>
+					        </div>
+					        <div class="lbl_col larg36">
+								<p:outputLabel styleClass="padrao_lbl14 larg36" value="N° " for="clie_ds_numero"/>
+					        </div>
+					        <div class="txt_col larg100">
+								<p:inputText styleClass="padrao_txt larg100" id="clie_ds_numero" value="#{clienteView.cliente.clie_ds_numero}"/>
+					        </div>
+					    </div>
+					    <div>
+					        <div class="lbl_col larg150">
+								<p:outputLabel styleClass="padrao_lbl14 larg150" value="Complemento: " for="clie_ds_complemento"/>
+					        </div>
+					        <div class="txt_col larg320">
+								<p:inputText styleClass="padrao_txt larg320" id="clie_ds_complemento" value="#{clienteView.cliente.clie_ds_complemento}"/>
+					        </div>
+					        <div class="lbl_col larg136">
+								<p:outputLabel styleClass="padrao_lbl14 larg136" value="Bairro: " for="clie_ds_bairro"/>
+					        </div>
+					        <div class="txt_col larg260">
+								<p:inputText styleClass="padrao_txt larg260" id="clie_ds_bairro" value="#{clienteView.cliente.clie_ds_bairro}"/>
+					        </div>
+					    </div>
+					    <div>
+					        <div class="lbl_col larg150">
+								<p:outputLabel styleClass="padrao_lbl14 larg150" value="Cidade: " for="clie_ds_cidade"/>
+					        </div>
+					        <div class="txt_col larg320">
+								<p:inputText styleClass="padrao_txt larg320" id="clie_ds_cidade" value="#{clienteView.cliente.clie_ds_cidade}"/>
+					        </div>
+					        <div class="lbl_col larg136">
+								<p:outputLabel styleClass="padrao_lbl14 larg136" value="UF: " for="clie_sg_uf"/>
+					        </div>
+					        <div class="txt_col larg110">
+					            <p:selectOneMenu id="clie_sg_uf" value="#{clienteView.cliente.clie_sg_uf}">
+					                <f:selectItems  var="uf" value="#{commonsView.ufs}" itemLabel="#{uf}" />
+					            </p:selectOneMenu>	
+					        </div>
+					        <div class="lbl_col larg50">
+								<p:outputLabel styleClass="padrao_lbl14 larg50" value="CEP: " for="clie_ds_cep"/>
+					        </div>
+					        <div class="txt_col larg100">
+								<p:inputMask  mask="99999-999" styleClass="padrao_txt larg100" id="clie_ds_cep" value="#{clienteView.cliente.clie_ds_cep}"/>
+					        </div>
+					    </div>
+					    <div>
+					        <div class="lbl_col larg150">
+								<p:outputLabel styleClass="padrao_lbl14 larg150" value="Contato: " for="clie_nm_contato"/>
+					        </div>
+					        <div class="txt_col larg320">
+								<p:inputText styleClass="padrao_txt larg320" id="clie_nm_contato" value="#{clienteView.cliente.clie_nm_contato}"/>
+					        </div>
+					        <div class="lbl_col larg136">
+								<p:outputLabel styleClass="padrao_lbl14 larg136" value="Telefone: " for="clie_ds_telefone"/>
+					        </div>
+					        <div class="txt_col larg260">
+								<p:inputText styleClass="padrao_txt larg260" id="clie_ds_telefone" value="#{clienteView.cliente.clie_ds_telefone}"/>
+					        </div>
+					    </div>
+					    <div>
+					        <div class="lbl_col larg150">
+								<p:outputLabel styleClass="padrao_lbl14 larg150" value="e-mail: " for="clie_ds_email"/>
+					        </div>
+					        <div class="txt_col larg580">
+								<p:inputText styleClass="padrao_txt larg580" id="clie_ds_email" value="#{clienteView.cliente.clie_ds_email}"/>
+					        </div>
+					        <div class="lbl_col larg36">
+								<p:outputLabel styleClass="padrao_lbl14 larg36" value="Sts: " for="clie_in_status"/>
+					        </div>
+					        <div class="txt_col larg100">
+								<p:inputText styleClass="padrao_txt larg100" id="clie_in_status" disabled="true" value="#{clienteView.cliente.clie_in_status}"/>
+					        </div>
+					    </div>
+					    <div>
+					        <div class="lbl_col larg150">
+								<p:outputLabel styleClass="padrao_lbl14 larg150" value="Logomarca: " for="clie_tx_logo"/>
+					        </div>
+					        <div class="txt_col larg730">
+					        	<p:inputText styleClass="padrao_txt larg730" id="clie_tx_logo" value="#{clienteView.cliente.clie_tx_logo}"/>
+					        </div>
+					    </div>
+					    <div>
+					        <div class="lbl_col larg150">
+							    <p:outputLabel styleClass="padrao_lbl14 bloco" value="Observações: " for="clie_tx_observacao"/>
+					        </div>
+					        <div class="txt_col larg730">
+		    					<p:inputTextarea id="clie_tx_observacao" styleClass="padrao_txt larg730" rows="2" cols="89" counter="disp_obs" maxlength="100" counterTemplate="{0} caracteres restantes." autoResize="false" value="#{clienteView.cliente.clie_tx_observacao}" />
+								<h:outputText styleClass="padrao_lbl11 contador" id="disp_obs" />
+					        </div>
+					    </div>
+					 </div>
+				</p:fieldset>
+				<p:commandButton styleClass="padrao_btn" value="Salvar" action="#{clienteView.salvar()}" update="formedit"/>
+	   	    	<p:commandButton styleClass="padrao_btn" value="Cancelar" immediate="true" action="#{clienteView.listaClientes()}"/>
+				<p:commandButton styleClass="padrao_btn" ajax="true" onclick="PF('popUpClienteModulo').show();"  title="Módulo" value="Módulos" icon="ui-icon-check"/>
+		   	</div>
+		   	<p:dialog header="Modulo" resizable="false" draggable="false" width="600" position="center" height="500" widgetVar="popUpClienteModulo" modal="true" minHeight="40">
+    			<ui:include src="popUpClienteModulo.xhtml"></ui:include>
+			</p:dialog>
+		</h:form>
+   	    <t:saveState value="#{clienteView.cliente}"/>
+    	<t:saveState value="#{clienteView.filtro}"/>
+		<t:saveState value="#{clienteView.clientes}"/>
+	</ui:define>
+</ui:composition>

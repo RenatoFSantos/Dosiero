@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+	<h:body>
+		<h:form>
+		 	<div>
+	   	    	<p:outputLabel styleClass="padrao_lbl14" value="Filtrar por Nome: " for="txt_pesquisa"/>
+	   	    	<p:inputText id="txt_pesquisa" styleClass="padrao_txt" value="#{usuarioView.filtroPerfil.perf_nm_perfil}" size="30"/>&nbsp;
+				<p:commandButton styleClass="padrao_btn" value="Pesquisar" action="#{usuarioView.pesquisarPerfils()}" update="tbPerfils" />	 	
+		 	</div>
+			<p:dataTable id="tbPerfils"  var="perf" value="#{usuarioView.perfils}" rows="10" paginator="true">
+		        <p:column width="80">
+					<p:commandButton oncomplete="PF('formedit:popUpPerfil').hidden();" action="#{usuarioView.selecionarPerfil()}" id="btn_selecionar" update=":perf_ds_perfil" title="selecionar" ajax="false" icon="ui-icon-arrowreturn-1-w">
+						<f:setPropertyActionListener value="#{perf}" target="#{usuarioView.perfilSel}"/>
+					</p:commandButton>
+		        </p:column>			        
+		        <p:column headerText="Id" width="40" style="text-align: center;">	
+		            <h:outputText value="#{perf.id}" />
+		        </p:column>
+		        <p:column headerText="Sigla" width="100" style="text-align: center;">	
+		            <h:outputText value="#{perf.perf_cd_perfil}"/>
+		        </p:column>		 
+		        <p:column headerText="Nome de Perfil">
+		            <h:outputText value="#{perf.perf_nm_perfil}"/>
+		        </p:column>
+		    </p:dataTable>
+		    <t:saveState value="#{usuarioView.filtroPerfil}"/>
+		    <t:saveState value="#{usuarioView.perfils}"/>
+		</h:form>
+	</h:body>
+</ui:composition>

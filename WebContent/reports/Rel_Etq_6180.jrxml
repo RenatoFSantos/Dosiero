@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Rel_Etq_6180" language="groovy" columnCount="3" printOrder="Horizontal" pageWidth="612" pageHeight="792" columnWidth="189" columnSpacing="9" leftMargin="13" rightMargin="13" topMargin="35" bottomMargin="30" uuid="daecbf27-d4cb-455c-b9f8-6d9e2c5baeca">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="acer_ds_assunto" class="java.lang.String">
+		<fieldDescription><![CDATA[acer_ds_assunto]]></fieldDescription>
+	</field>
+	<field name="acer_nr_codbarras" class="java.lang.String">
+		<fieldDescription><![CDATA[acer_nr_codbarras]]></fieldDescription>
+	</field>
+	<field name="id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[id]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="61" splitType="Stretch">
+			<componentElement>
+				<reportElement x="47" y="20" width="101" height="36" uuid="00dd8e65-1347-4724-baee-bfc52b360d57"/>
+				<jr:EAN13 xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" textPosition="bottom">
+					<jr:codeExpression><![CDATA[$F{acer_nr_codbarras}]]></jr:codeExpression>
+				</jr:EAN13>
+			</componentElement>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="10" y="6" width="168" height="10" uuid="1c155caa-13bc-49bf-a6b2-80d140d6a419"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{acer_ds_assunto}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

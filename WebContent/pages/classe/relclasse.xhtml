@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="../template/_template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+
+	<ui:define name="conteudo">
+			<p:messages id="message_erro" severity="error" autoUpdate="true" closable="true" />
+	   	    <p:growl id="message_info" severity="info, warn" autoUpdate="true"/>
+	   	    <div id="barratitulo">
+	   	    	Relatório de Classe
+	   	    </div>
+			<h:form id="formRel" prependId="false">
+				<p:panel id="panelRel">
+					<h:panelGroup id="groupRel" layout="block" styleClass="ui-fluid" style="background-color: #ccc !important;">
+						<p:panelGrid columns="2" layout="grid" columnClasses="ui-grid-col-2, ui-grid-col-10">
+							<!-- SUBCLASSE -->
+							<p:outputLabel styleClass="padrao_lbl14 larg150 lblGrid" value="Subclasse: " for="clas_ds_nome" />
+							<h:panelGroup>
+								<p:inputText styleClass="padrao_txt larg500" id="clas_ds_nome" value="#{classeView.editada.clas_cd_classe} - #{classeView.editada.clas_ds_nome}" required="true" readonly="true" requiredMessage="Classe obrigatória!"/>
+						       	<p:commandButton styleClass="padrao_btn" ajax="true" onclick="PF('popUpClasse').show();" title="Classe"  update="clas_ds_nome"  icon="ui-icon-search"></p:commandButton>
+						    </h:panelGroup>
+							<!-- FORMATO RELATORIO (PDF-XLS) -->
+						    <p:outputLabel styleClass="padrao_lbl14 larg150 lblGrid" value="Formato: " for="opc_rlt" />
+					        <p:selectOneMenu styleClass="padrao_txt larg200" id="opc_rlt" value="#{classeView.fmtRlt}" >
+					            <f:selectItem itemLabel="PDF" itemValue="PDF"  />
+					            <f:selectItem itemLabel="XLS" itemValue="XLS" />
+					        </p:selectOneMenu>
+					   	</p:panelGrid>
+				 	</h:panelGroup>
+			 	</p:panel>
+		   	    <div id="btn_crud">
+		   	    	<p:commandButton styleClass="padrao_btn" value="Filtrar" ajax="false" action="#{classeView.geraRelatorioClasse()}"/>
+		   	    	&nbsp;
+		   	    	<p:commandButton styleClass="padrao_btn" value="Cancelar" action="#{classeView.retorna()}"/>
+		   	    </div>
+		   	</h:form>
+		   	<p:dialog header="Classe" resizable="false" draggable="false" width="960" position="center" height="500" widgetVar="popUpClasse" modal="true" minHeight="40" minWidth="300">
+    			<ui:include src="popUpClasse.xhtml"></ui:include>
+			</p:dialog>
+		   	<t:saveState value="#{classeView.editada}"/>
+	</ui:define> 
+</ui:composition>
+ 

@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<ui:composition template="/pages/template/templateCrud.xhtml">
+	<ui:define name="menuCrud">
+		<ui:include src="/pages/menuCrud/menuCrud.xhtml" />
+	</ui:define>
+	<ui:define name="crud">
+		<table border="1" width="100%">
+			<tr>
+				<td width="20%"><p:outputLabel value="Código" /></td>
+				<td><p:inputText maxlength="15" style="width:100px"
+						value="#{produtoView.produtoEntity.id}" styleClass="inputText"
+						disabled="true" /></td>
+			</tr>
+			<tr>
+				<td><p:outputLabel value="Código Fabricante" /></td>
+				<td><p:inputText maxlength="100" style="width:100px;"
+						value="#{produtoView.produtoEntity.codigo}" styleClass="inputText" /></td>
+			</tr>
+
+			<tr>
+				<td><p:outputLabel value="Nome" /></td>
+				<td><p:inputText maxlength="100" styleClass="inputText"
+						value="#{produtoView.produtoEntity.nome}" style=" width:350px;" /></td>
+			</tr>
+			<tr>
+				<td><p:outputLabel value="Tamanho" /></td>
+				<td><p:inputText maxlength="3" style="width:90px;"
+						value="#{produtoView.produtoEntity.tamanho}"
+						styleClass="inputText" /></td>
+			</tr>
+			<tr>
+				<td><p:outputLabel value="Qtde c/ NFE" /></td>
+				<td><pe:inputNumber id="txtQtdeCnfe" symbolPosition="s"
+						decimalSeparator="," thousandSeparator="."
+						value="#{produtoView.produtoEntity.qtdeNfe}">
+					</pe:inputNumber></td>
+			</tr>
+			<tr>
+				<td><p:outputLabel value="Qtde s/ NFE" /></td>
+				<td><pe:inputNumber id="txtQtdeSnfe" symbolPosition="s"
+						decimalSeparator="," thousandSeparator="."
+						value="#{produtoView.produtoEntity.qtdeSNfe}">
+					</pe:inputNumber></td>
+			</tr>
+
+			<tr>
+				<td><p:outputLabel value="Vl. Venda" /></td>
+				<td><pe:inputNumber id="txtValor" symbolPosition="s"
+						value="#{produtoView.produtoEntity.valorVenda}"
+						decimalSeparator="," thousandSeparator=".">
+					</pe:inputNumber></td>
+			</tr>
+		</table>
+	</ui:define>
+</ui:composition>
+</html>

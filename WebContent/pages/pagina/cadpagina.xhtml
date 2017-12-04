@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="../template/_template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+
+	<ui:define name="conteudo">
+		<h:form id="formlista" prependId="true">
+			<p:messages id="message_erro" severity="error" autoUpdate="true" closable="true" />
+	   	    <p:growl id="message_info" severity="info, warn" autoUpdate="true"/>
+	   	    <div id="barratitulo">
+	   	    	Cadastro de Página
+	   	    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	   	    	<p:outputLabel styleClass="padrao_lbl14" value="Filtrar por Nome: " for="txt_pesquisa"/>
+	   	    	<p:inputText id="txt_pesquisa" styleClass="padrao_txt" value="#{paginaView.filtro.pagi_nm_pagina}" size="60"/>&nbsp;
+				<p:commandButton styleClass="padrao_btn" value="Pesquisar" action="#{paginaView.pesquisar()}" update="tbPaginas" />
+	   	    </div>
+	   	    <div>
+			    <p:dataTable id="tbPaginas" var="pag" value="#{paginaView.paginas}" rows="10" paginator="true">
+			        <p:column width="80">
+			        	<p:commandButton id="btn_editar" title="editar" action="#{paginaView.editar()}" ajax="false" icon="ui-icon-pencil">
+			        		<f:setPropertyActionListener value="#{pag}" target="#{paginaView.paginaSel}"/>
+			        	</p:commandButton>
+    					<p:commandButton id="btn_excluir" title="excluir" action="#{paginaView.excluir()}" icon="ui-icon-closethick" update="tbPaginas">
+				        	<f:setPropertyActionListener value="#{pag}" target="#{paginaView.paginaSel}"/>
+						    <p:confirm header="Confirmação" message="Deseja excluir este registro?" icon="ui-icon-alert"/>
+    					</p:commandButton>
+					    <p:confirmDialog global="true">
+						       <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+						       <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+					    </p:confirmDialog>
+			        </p:column>			        
+			        <p:column headerText="Id" width="40" style="text-align: center;">	
+			            <h:outputText value="#{pag.id}" />
+			        </p:column>
+			        <p:column headerText="Nome de Pagina">
+			            <h:outputText value="#{pag.pagi_nm_pagina}" />
+			        </p:column>
+			    </p:dataTable>	   	    
+	   	    </div>
+	   	    <div id="btn_crud">
+	   	    	<p:commandButton styleClass="padrao_btn" value="Incluir" ajax="false" action="#{paginaView.inserir()}"/>
+	   	    	&nbsp;
+	   	    	<p:commandButton styleClass="padrao_btn" value="Cancelar" action="#{paginaView.retorna()}"/>
+	   	    </div>
+			<t:saveState value="#{paginaView.filtro}"/>
+	   	    <t:saveState value="#{paginaView.pagina}"/>
+   			<t:saveState value="#{paginaView.paginas}"/>
+		</h:form>
+	</ui:define>
+</ui:composition>

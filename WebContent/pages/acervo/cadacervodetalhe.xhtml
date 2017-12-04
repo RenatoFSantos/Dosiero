@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="../template/_template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+
+	<ui:define name="conteudo">
+		<h:form id="formedit">
+			<p:messages id="message_erro" severity="error" autoUpdate="true" closable="true" />
+	   	    <p:growl id="message_info" severity="info, warn" autoUpdate="true"/>
+	   	    <div id="barratitulo">
+	   	    	Acervo
+	   	    </div>
+	   	    <div id="formcadastro">
+	   	    	<p:fieldset>
+	   	    		<div class="tab larg900">
+					    <!-- BOTÕES -->
+					    <div class="txt_right larg600">
+    						<p:commandButton id="btn_historico" styleClass="padrao_btn" value="Histórico" disabled="#{acervoView.bloqBotoes}"  update="formedit" icon="ui-icon-folder-collapsed"/>
+    						<p:commandButton id="btn_atualizacao" styleClass="padrao_btn" value="Atualização" disabled="#{acervoView.bloqBotoes}" action="#{acervoView.atualizarAcervo()}" update="formedit" icon="ui-icon-refresh"/>
+							<p:commandButton id="btn_emprestimo" styleClass="padrao_btn" value="Empréstimo" disabled="#{acervoView.bloqBotoes}" action="#{emprestimoView.balcao}" update="formedit" icon="ui-icon-extlink"/>
+							<p:commandButton id="btn_descritor" styleClass="padrao_btn" value="Descritores" disabled="#{acervoView.bloqBotoes}" action="#{acervoView.listaDescritores()}" update="descdialog" icon="ui-icon-key"/>
+						</div>
+					</div>
+	   	    		<div class="tab larg900">
+					    <!-- ID -->
+					    <div class="lbl_col larg150">
+							<p:outputLabel styleClass="padrao_lbl14 larg150" value="ID: " for="acer_sq_id"/>
+						</div>
+				        <div class="txt_col larg150">
+							<p:inputText styleClass="padrao_txt larg50" id="acer_sq_id" readonly="true" disabled="true" value="#{acervoView.acervo.id}"/>
+				        </div>
+						<!-- FC -->
+						<div class="lbl_col larg180">
+							<p:outputLabel styleClass="padrao_lbl14 larg180" value="FC: " for="acer_tx_fc"/>
+						</div>
+						<div class="txt_col larg100">
+							<p:inputText styleClass="padrao_txt larg70" id="acer_tx_fc" readonly="true" disabled="true" value="#{acervoView.acervo.objClasse.clas_ds_fasecorrente}"/>
+						</div>
+						<!-- FI -->
+						<div class="lbl_col larg50">
+							<p:outputLabel styleClass="padrao_lbl14 larg50" value="FI: " for="acer_tx_fi"/>
+						</div>
+						<div class="txt_col larg100">
+							<p:inputText styleClass="padrao_txt larg70" id="acer_tx_fi" readonly="true" disabled="true" value="#{acervoView.acervo.objClasse.clas_tx_faseintermediaria} ANO(s)"/>
+						</div>
+						<!-- DF -->
+						<div class="lbl_col larg50">
+							<p:outputLabel styleClass="padrao_lbl14 larg50" value="DF: " for="acer_tx_df"/>
+						</div>
+						<div class="txt_col larg80">
+							<p:inputText styleClass="padrao_lar larg70" id="acer_tx_df" readonly="true" disabled="true" value="#{acervoView.acervo.objClasse.clas_tx_destinacaofinal}"/>
+						</div>
+					</div>
+					<div class="tab larg900">
+						<!-- DT. INCLUSAO -->
+					    <div class="lbl_col larg150">
+							<p:outputLabel styleClass="padrao_lbl14 larg150" value="Dt. Inclusão: " for="acer_dt_inclusao"/>
+						</div>
+				        <div class="txt_col larg150">
+							<p:calendar styleClass="padrao_txt larg150" id="acer_dt_inclusao" size="11" mindate="01/01/2000" maxdate="31/12/2099" readonly="true" disabled="true" locale="pt_BR" pattern="dd/MM/yyyy" value="#{acervoView.acervo.acer_dt_inclusao}" />
+				        </div>
+						<!-- DT. REFERENCIA -->
+					    <div class="lbl_col larg180">
+							<p:outputLabel styleClass="padrao_lbl14 larg150" value="Dt. Referência: " for="acer_dt_referencia"/>
+						</div>
+				        <div class="txt_col larg150">
+							<p:calendar styleClass="padrao_txt larg150" id="acer_dt_referencia" size="11" mindate="01/01/2000" maxdate="31/12/2099" locale="pt_BR" pattern="dd/MM/yyyy" value="#{acervoView.acervo.acer_dt_referencia}">
+								<p:ajax event="change" listener="#{acervoView.atualizarAcervo()}" update="acer_in_status, acer_dt_prevmvt_fc_fi, acer_dt_realmvt_fc_fi, acer_dt_prevmvt_fi_df, acer_dt_realmvt_fi_df"/>
+								<p:ajax event="dateSelect" listener="#{acervoView.atualizarAcervo()}" update="acer_in_status, acer_dt_prevmvt_fc_fi, acer_dt_realmvt_fc_fi, acer_dt_prevmvt_fi_df, acer_dt_realmvt_fi_df"/>
+							</p:calendar>
+				        </div>
+					    <!-- POSIÇÃO ATUAL -->
+					    <div class="lbl_col larg150">
+							<p:outputLabel styleClass="padrao_lbl14 larg150" value="Posição Atual: " for="acer_in_status"/>
+						</div>
+				        <div class="txt_col larg70">
+							<p:inputText styleClass="padrao_lar larg70" id="acer_in_status" readonly="true" disabled="true" value="#{acervoView.acervo.acer_in_status}"/>
+				        </div>
+					</div>
+				    <div class="tab larg900">
+						<!-- TIPO -->
+						<div class="lbl_col larg150">
+							<p:outputLabel styleClass="padrao_lbl14" value="Tipo: " for="listatipo"/>
+						</div>
+						<div class="txt_col larg750">
+					        <p:selectOneMenu id="listatipo"  value="#{acervoView.acervo.objTipo}" required="true" requiredMessage="Tipo obrigatório!" converter="tipoConverter" var="tp" style="width: 300px;">
+					            <f:selectItems var="seltp" value="#{tipoView.tipos}" itemLabel="#{seltp.tipo_ds_tipo}" itemValue="#{seltp}"/>
+					            <p:column>
+					                <h:outputText value="#{tp.tipo_ds_tipo}" />
+					            </p:column>
+					        </p:selectOneMenu>
+					    </div>
+					</div>
+					<div class="tab larg900">
+						<!-- UNIDADE -->
+					    <div class="lbl_col larg150">
+							<p:outputLabel styleClass="padrao_lbl14 larg150" value="Unidade: " for="unid_ds_unidade"/>
+						</div>
+				        <div class="txt_col larg750">
+							<p:inputText styleClass="padrao_txt larg660" id="unid_ds_unidade" value="#{acervoView.acervo.objUnidade.unid_nm_unidade}" required="true" readonly="true" requiredMessage="Unidade obrigatória!"/>
+				        	<p:commandButton styleClass="padrao_btn" ajax="true" action="#{acervoView.listaUnidades()}" title="Unidade"  update="unddialog"  icon="ui-icon-search"></p:commandButton>
+				        </div>
+				    </div>
+					<div class="tab larg900">
+						<!-- SUBCLASSE -->
+					    <div class="lbl_col larg150">
+							<p:outputLabel styleClass="padrao_lbl14 larg150" value="SubClasse: " for="clas_ds_nome"/>
+						</div>
+				        <div class="txt_col larg750">
+							<p:inputText styleClass="padrao_txt larg660" id="clas_ds_nome" value="#{acervoView.acervo.objClasse.clas_cd_classe} - #{acervoView.acervo.objClasse.clas_ds_nome}" required="true" readonly="true" requiredMessage="Classe obrigatória!"/>
+				        	<p:commandButton styleClass="padrao_btn" ajax="true" action="#{acervoView.listaClasses()}" title="Classe"  update="clas_ds_nome"  icon="ui-icon-search"></p:commandButton>
+				        </div>
+				    </div>
+					<div class="tab larg900">
+						<!-- ESTRUTURA HIERARQUICA DA CLASSE -->
+					    <div class="lbl_col larg150">
+							<p:outputLabel styleClass="padrao_lbl14 larg150" value="Estrutura hierárquica: "/>
+						</div>
+				        <div class="txt_col larg750">
+	    					<p:inputTextarea id="clas_tx_hierarquia" styleClass="padrao_txt larg700" rows="3" cols="85" maxlength="1000" autoResize="false" readonly="true" disabled="true" value="#{acervoView.acervo.acer_tx_hierarquia}"/>
+				        </div>
+				    </div>
+					<div class="tab larg900">
+						<!-- ASSUNTO -->
+					    <div class="lbl_col larg150">
+							<p:outputLabel styleClass="padrao_lbl14 larg150" value="Assunto: " for="acer_ds_assunto"/>
+						</div>
+				        <div class="txt_col larg750">
+	    					<p:inputTextarea id="acer_ds_assunto" styleClass="padrao_txt larg700" rows="1" cols="85" counter="disp_end" maxlength="100" counterTemplate="{0} caracteres restantes." autoResize="false" value="#{acervoView.acervo.acer_ds_assunto}" requiredMessage="Assunto obrigatório!"/>
+	    					<h:outputText styleClass="padrao_lbl11 contador" id="disp_end" />
+				        </div>
+				    </div>
+					<div class="tab larg900">
+						<!-- FINAL VIGENCIA -->
+					    <div class="lbl_col larg150">
+							<p:outputLabel styleClass="padrao_lbl14 larg150" value="Final de Vigência: " for="acer_dt_finalvigencia"/>
+						</div>
+				        <div class="txt_col larg150">
+							<p:calendar styleClass="padrao_txt larg150" id="acer_dt_finalvigencia" size="11" mindate="01/01/2000" maxdate="31/12/2099" locale="pt_BR" pattern="dd/MM/yyyy" value="#{acervoView.acervo.acer_dt_finalvigencia}" disabled="#{acervoView.bloqVigencia}">
+								<p:ajax event="change"  listener="#{acervoView.atualizarAcervo()}" update="acer_in_status, acer_dt_prevmvt_fc_fi, acer_dt_realmvt_fc_fi, acer_dt_prevmvt_fi_df, acer_dt_realmvt_fi_df"/>
+								<p:ajax event="dateSelect" listener="#{acervoView.atualizarAcervo()}" update="acer_in_status, acer_dt_prevmvt_fc_fi, acer_dt_realmvt_fc_fi, acer_dt_prevmvt_fi_df, acer_dt_realmvt_fi_df"/>
+							</p:calendar>
+				        </div>
+						<!-- LOCAL ARQUIVO -->
+					    <div class="lbl_col larg180">
+							<p:outputLabel styleClass="padrao_lbl14 larg150" value="Local arquivo: " for="acer_ds_localarquivo"/>
+						</div>
+				        <div class="txt_col larg400">
+							<p:inputText styleClass="padrao_txt larg370" id="acer_ds_localarquivo" value="#{acervoView.acervo.acer_ds_localarquivo}"/>
+				        </div>
+				    </div>
+					<div class="tab larg900">
+						<!-- DIGITALIZADO -->
+					    <div class="lbl_col larg150">
+							<p:outputLabel styleClass="padrao_lbl14" value="Digitalizado: " for="acer_in_digitalizado"/>
+							<p:selectBooleanCheckbox id="acer_in_digitalizado" styleClass="padrao_txt" value="#{acervoView.acervo.acer_in_digitalizado}"/>
+						</div>
+						<!-- AUTO MOVIMENTACAO -->
+					    <div class="lbl_col larg180">
+							<p:outputLabel styleClass="padrao_lbl14" value="Auto movimentação: " for="acer_in_automovimentacao"/>
+							<p:selectBooleanCheckbox id="acer_in_automovimentacao" styleClass="padrao_txt" immediate="true" value="#{acervoView.acervo.acer_in_automovimentacao}"  update="acer_in_status, acer_dt_prevmvt_fc_fi, acer_dt_realmvt_fc_fi, acer_dt_prevmvt_fi_df, acer_dt_realmvt_fi_df">
+								<p:ajax listener="#{acervoView.checkboxChanged}" update="acer_in_status, acer_dt_prevmvt_fc_fi, acer_dt_realmvt_fc_fi, acer_dt_prevmvt_fi_df, acer_dt_realmvt_fi_df"  />
+							</p:selectBooleanCheckbox>
+						</div>
+						<!-- ARQUIVO DIGITAL -->
+					    <div class="lbl_col larg150">
+							<p:outputLabel styleClass="padrao_lbl14 larg150" value="Arquivo digital: " for="acer_ds_arquivodigital"/>
+						</div>
+				        <div class="txt_col larg400">
+							<p:inputText styleClass="padrao_txt larg370" id="acer_ds_arquivodigital" value="#{acervoView.acervo.acer_ds_arquivodigital}"/>
+				        </div>
+				    </div>
+					<div class="tab larg900">
+						<!-- OBSERVACAO -->
+					    <div class="lbl_col larg150">
+							<p:outputLabel styleClass="padrao_lbl14 larg150" value="Observações: " for="acer_tx_observacao"/>
+						</div>
+				        <div class="txt_col larg750">
+	    					<p:inputTextarea id="acer_tx_observacao" styleClass="padrao_txt larg700" rows="3" cols="85" counter="disp_obs" maxlength="1000" counterTemplate="{0} caracteres restantes." autoResize="false" value="#{acervoView.acervo.acer_tx_observacao}" />
+	    					<h:outputText styleClass="padrao_lbl11 contador" id="disp_obs" />
+				        </div>
+				    </div>
+				    <div class="tab larg900">
+						<!-- CODIGO DE BARRAS -->
+						<div class="lbl_col larg150">
+							<p:outputLabel styleClass="padrao_lbl14" value="Código de barras: " for="acer_nr_codbarras"/>
+						</div>
+						<div class="txt_col larg750">
+							<p:inputText styleClass="padrao_txt" style="width: 100px;" id="acer_nr_codbarras" disabled="true" readonly="true" value="#{acervoView.acervo.acer_nr_codbarras}"/>
+						</div>
+				    </div>
+				    <div class="tabcinza larg900">
+				    	<!-- TITULOS -->
+				    	<div>
+						    <div class="lbl_acervo_tit_1">
+								<p:outputLabel value="Transição de Fase"/>
+							</div>
+						    <div class="lbl_acervo_tit_2">
+								<p:outputLabel value="Previsto"/>
+							</div>
+						    <div class="lbl_acervo_tit_2">
+								<p:outputLabel value="Realizado"/>
+							</div>
+						</div>
+				    	<div>
+						    <div class="lbl_col larg380" style="margin-left: 20px;">
+								<p:outputLabel styleClass="padrao_lbl14 larg380" value="Fase Corrente (FC) para Fase Intermediária (FI)" />
+							</div>
+						    <div class="txt_col larg150" style="margin-left: 110px;">
+								<p:calendar styleClass="padrao_txt larg150 centro" id="acer_dt_prevmvt_fc_fi" disabled="#{acervoView.datBloqueada}" size="11" mindate="01/01/2000" maxdate="31/12/2099" locale="pt_BR" pattern="dd/MM/yyyy" value="#{acervoView.acervo.acer_dt_prevmvt_fc_fi}" />
+							</div>
+						    <div class="txt_col larg150" style="margin-left: 50px;">
+								<p:calendar styleClass="padrao_txt larg150 centro" id="acer_dt_realmvt_fc_fi" disabled="#{acervoView.datBloqueada}" size="11" mindate="01/01/2000" maxdate="31/12/2099" locale="pt_BR" pattern="dd/MM/yyyy" value="#{acervoView.acervo.acer_dt_realmvt_fc_fi}" />
+							</div>
+						</div>
+				    	<div>
+						    <div class="lbl_col larg380" style="margin-left: 20px;">
+								<p:outputLabel styleClass="padrao_lbl14 larg380" value="Fase Intermediária (FI) para Destinação Final (DF)" />
+							</div>
+						    <div class="txt_col larg150" style="margin-left: 110px;">
+								<p:calendar styleClass="padrao_txt larg150 centro" id="acer_dt_prevmvt_fi_df" disabled="#{acervoView.datBloqueada}" size="11" mindate="01/01/2000" maxdate="31/12/2099" locale="pt_BR" pattern="dd/MM/yyyy" value="#{acervoView.acervo.acer_dt_prevmvt_fi_df}" />
+							</div>
+						    <div class="txt_col larg150" style="margin-left: 50px;">
+								<p:calendar styleClass="padrao_txt larg150 centro" id="acer_dt_realmvt_fi_df" disabled="#{acervoView.datBloqueada}" size="11" mindate="01/01/2000" maxdate="31/12/2099" locale="pt_BR" pattern="dd/MM/yyyy" value="#{acervoView.acervo.acer_dt_realmvt_fi_df}" />
+							</div>
+						</div>
+					</div>
+				</p:fieldset>
+			</div>
+			<div id="formtabela">
+				<p:commandButton id="btn_documento" styleClass="padrao_btn" value="Anexar Documento" action="#{acervoView.inserirDocumento()}" disabled="#{acervoView.bloqBotoes}" update="formdoc" icon="ui-icon-folder-open"/>
+			    <p:dataTable id="tbArquivos" var="doc" value="#{acervoView.acervo.documentos}" paginator="false">
+			        <p:column width="145">
+			        	<p:commandButton id="btn_editar" title="editar" action="#{acervoView.editarDoc()}" icon="ui-icon-pencil" update="formdoc">
+			        		<f:setPropertyActionListener value="#{doc}" target="#{acervoView.documentoSel}"/>
+			        	</p:commandButton>
+    					<p:commandButton id="btn_excluir" title="excluir" action="#{acervoView.excluirDoc()}" icon="ui-icon-closethick" update="tbArquivos">
+				        	<f:setPropertyActionListener value="#{doc}" target="#{acervoView.documentoSel}"/>
+						    <p:confirm  header="Confirmação"  message="Deseja excluir este documento vinculado?"  icon="ui-icon-alert"/>
+    					</p:commandButton>
+    					<p:commandButton id="btn_upload" title="upload" action="#{acervoView.uploadDocumento()}" icon="ui-icon-arrowthick-1-n" update="tbArquivos :formUp">
+				        	<f:setPropertyActionListener value="#{doc}" target="#{acervoView.documentoSel}"/>
+    					</p:commandButton>
+    					<p:commandButton id="btn_download" title="download" ajax="false" icon="ui-icon-arrowthick-1-s" update="formedit">
+				        	<f:setPropertyActionListener value="#{doc}" target="#{acervoView.documentoSel}"/>
+					        <p:fileDownload value="#{acervoView.file}" />
+    					</p:commandButton>
+    					<p:confirmDialog global="true" >
+						       <p:commandButton value="Sim"  type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+						       <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+					    </p:confirmDialog> 
+ 			        </p:column>			        
+			        <p:column headerText="Documento">
+			            <h:outputText value="#{doc.docu_nm_documento}"/>
+			        </p:column>
+			        <p:column headerText="Arquivo Vinculado">
+			            <h:outputText value="#{doc.docu_nm_arquivo}"/>
+			        </p:column>
+			    </p:dataTable>
+			    <br/>	   	   
+				<p:commandButton styleClass="padrao_btn" value="Salvar" action="#{acervoView.salvar()}" update="formedit"/>
+	   	    	<p:commandButton styleClass="padrao_btn" process="@this" update="@form" immediate="true" value="Cancelar" action="#{acervoView.listaAcervos()}"/>
+				<!-- MANTER INFORMAÇÕES AO SALVAR -->
+				<div class="txt_col larg680">
+					<p:selectBooleanCheckbox id="chk_manter" styleClass="padrao_txt" immediate="true" value="#{acervoView.manterDados}"/>
+					<p:outputLabel styleClass="padrao_lbl14" value="Manter as informações ao Salvar" for="chk_manter"/>
+				</div>
+		   	</div>
+		</h:form>
+		<p:dialog id="unddialog" header="Unidade" resizable="false" draggable="false" width="600" position="center" height="500" widgetVar="popUpUnidadeAcervo" modal="true" minHeight="40" minWidth="300">
+    		<ui:include src="popUpUnidadeAcervo.xhtml"></ui:include>
+		</p:dialog>
+		<p:dialog header="Classe" resizable="false" draggable="false" width="960" position="center" height="500" widgetVar="popUpClasseAcervo" modal="true" minHeight="40" minWidth="300">
+    		<ui:include src="popUpClasseAcervo.xhtml"></ui:include>
+		</p:dialog>
+	   	<p:dialog id="descdialog" header="Descritor" resizable="false" draggable="false" width="600" position="center" height="630" widgetVar="popUpDescritor" modal="true" minHeight="40" minWidth="300">
+   			<ui:include src="popUpDescritorAcervo.xhtml"></ui:include>
+		</p:dialog>
+	   	<p:dialog header="Documento" resizable="false" draggable="false" width="900" position="center" widgetVar="popUpDocumento" modal="true" minHeight="40" minWidth="300">
+   			<ui:include src="popUpDocumento.xhtml"></ui:include>
+		</p:dialog>
+	   	<p:dialog header="Upload Arquivo" resizable="false" draggable="false" width="900" position="center" widgetVar="popUpUpload" modal="true" minHeight="40" minWidth="300">
+   			<ui:include src="popUpUpload.xhtml"></ui:include>
+		</p:dialog>
+
+		<p:ajaxStatus onstart="PF('statusDialog').show();" onsuccess="PF('statusDialog').hide();" />
+	
+		<p:dialog styleClass="dialogo" modal="true" widgetVar="statusDialog" draggable="false" resizable="false" closable="false" showHeader="false">
+			<h:graphicImage library="img" name="ajax-loader.gif"/>
+		</p:dialog>  	    
+		<t:saveState value="#{acervoView.acervo}"/>
+    	<t:saveState value="#{acervoView.filtro}"/>
+		<t:saveState value="#{acervoView.acervos}"/>
+	</ui:define>
+</ui:composition>

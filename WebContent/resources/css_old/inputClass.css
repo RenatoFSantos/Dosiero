@@ -1,0 +1,10 @@
+@CHARSET "ISO-8859-1";
+
+.inputText {
+	font-size: 11pt;
+	text-transform: uppercase;
+}
+
+.ui-widget
+{	font-size: 11pt!important;
+}

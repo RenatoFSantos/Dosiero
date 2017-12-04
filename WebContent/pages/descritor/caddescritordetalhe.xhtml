@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="../template/_template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+
+	<ui:define name="conteudo">
+		<h:form id="formedit">
+			<p:messages id="message_erro" severity="error" autoUpdate="true" closable="true" />
+	   	    <p:growl id="message_info" severity="info, warn" autoUpdate="true"/>
+	   	    <div id="barratitulo">
+	   	    	Cadastro de Descritor
+	   	    </div>
+	   	    <div id="formcadastro">
+	   	    	<p:fieldset>
+						<p:outputLabel styleClass="padrao_lbl14 lbl_col1" value="ID:"/>
+						<p:outputLabel styleClass="padrao_txt" value="#{descritorView.descritor.id}"/>
+						<br/>
+						<p:outputLabel styleClass="padrao_lbl14 lbl_col1" value="Sigla " for="desc_sg_descritor"/>
+						<p:inputText styleClass="padrao_txt larg200" id="desc_sg_descritor" value="#{descritorView.descritor.desc_sg_descritor}" maxlength="20"/>
+						<br/>
+						<p:outputLabel styleClass="padrao_lbl14 lbl_col1" value="Nome do Descritor: " for="desc_nm_descritor"/>
+						<p:inputText styleClass="padrao_txt larg600" id="desc_nm_descritor" value="#{descritorView.descritor.desc_nm_descritor}" required="true" requiredMessage="Nome obrigatório!"/>
+						<br/>
+						<p:outputLabel styleClass="padrao_lbl14 lbl_col1" value="Complemento: " for="desc_ds_complemento"/>
+						<p:inputText styleClass="padrao_txt larg600" id="desc_ds_complemento" value="#{descritorView.descritor.desc_ds_complemento}"/>
+						<br/>
+						<p:outputLabel styleClass="padrao_lbl14 lbl_col1" value="Índice: " for="desc_cd_indice"/>
+						<p:inputText styleClass="padrao_txt larg100" id="desc_cd_indice" value="#{descritorView.descritor.desc_cd_indice}"/>
+						<br/>
+				</p:fieldset>
+				<p:commandButton styleClass="padrao_btn" value="Salvar" action="#{descritorView.salvar()}" update="formedit"/>
+	   	    	<p:commandButton styleClass="padrao_btn" process="@this" update="@form" immediate="true" value="Cancelar" action="#{descritorView.listaDescritors()}"/>
+		   	</div>
+		</h:form>
+   	    <t:saveState value="#{descritorView.descritor}"/>
+    	<t:saveState value="#{descritorView.filtro}"/>
+		<t:saveState value="#{descritorView.descritors}"/>
+	</ui:define>
+</ui:composition>

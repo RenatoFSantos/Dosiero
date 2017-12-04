@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="../template/_template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+
+	<ui:define name="conteudo">
+			<p:messages id="message_erro" severity="error" autoUpdate="true" closable="true" />
+	   	    <p:growl id="message_info" severity="info, warn" autoUpdate="true"/>
+	   	    <div id="barratitulo">
+	   	    	Cadastro de Classe
+	   	    </div>
+			<h:form id="formlista" prependId="false">
+		   	    <div id="formcadastroClasse">
+					<div id="arvore">
+	 					<p:treeTable id="treeclass" value="#{classeView.classesTree}" var="document" selectionMode="single" selection="#{classeView.selectedNode}">
+	 						<p:ajax event="select" listener="#{classeView.onNodeSelect}"/>
+					        <f:facet name="header">
+					            Classes
+					        </f:facet>
+					        <p:column headerText="Nome">
+					            <h:outputText value="#{document.clas_cd_classe} - #{document.clas_ds_nome}" />
+					        </p:column>
+					    </p:treeTable>
+					</div>					
+			   	    <div id="btn_crud">
+			   	    	<p:commandButton styleClass="padrao_btn" value="Incluir" ajax="false" action="#{classeView.inserir()}"/>
+			   	    	&nbsp;
+			   	    	<p:commandButton styleClass="padrao_btn" value="Editar" update=":formedit" ajax="false" action="#{classeView.abrirDetalhe()}"/>
+			   	    	&nbsp;
+			   	    	<p:commandButton styleClass="padrao_btn" value="Cancelar" action="#{classeView.retorna()}"/>
+			   	    </div>
+			   	</div>
+		   	</h:form>
+		   	<t:saveState value="#{classeView.editada}"/>
+	</ui:define> 
+ 
+</ui:composition>
+ 

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="../template/_template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+
+	<ui:define name="conteudo">
+		<h:form id="formlista" prependId="true">
+			<p:messages id="message_erro" severity="error" autoUpdate="true" closable="true" />
+	   	    <p:growl id="message_info" severity="info, warn" autoUpdate="true"/>
+	   	    <div id="barratitulo">
+	   	    	Cadastro de Categoria
+	   	    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	   	    	<p:outputLabel styleClass="padrao_lbl14" value="Filtrar por Nome: " for="txt_pesquisa"/>
+	   	    	<p:inputText id="txt_pesquisa" styleClass="padrao_txt" value="#{categoriaView.filtro.cate_nm_categoria}" size="60"/>&nbsp;
+				<p:commandButton styleClass="padrao_btn" value="Pesquisar" action="#{categoriaView.pesquisar()}" update="tbCategorias" />
+	   	    </div>
+	   	    <div>
+			    <p:dataTable id="tbCategorias" var="cate" value="#{categoriaView.categorias}" rows="10" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+			        <p:column width="80">
+			        	<p:commandButton id="btn_editar" title="editar" action="#{categoriaView.editar()}" ajax="false" icon="ui-icon-pencil">
+			        		<f:setPropertyActionListener value="#{cate}" target="#{categoriaView.categoriaSel}"/>
+			        	</p:commandButton>
+    					<p:commandButton id="btn_excluir" title="excluir" action="#{categoriaView.excluir()}" icon="ui-icon-closethick" update="tbCategorias">
+				        	<f:setPropertyActionListener value="#{cate}" target="#{categoriaView.categoriaSel}"/>
+						    <p:confirm  header="Confirmação"  message="Deseja excluir este registro?"  icon="ui-icon-alert"/>
+    					</p:commandButton>
+    					<p:confirmDialog global="true" >
+						       <p:commandButton value="Sim"  type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+						       <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+					    </p:confirmDialog> 
+					    
+ 			        </p:column>			        
+			        <p:column headerText="Id" width="40" style="text-align: center;">	
+			            <h:outputText value="#{cate.id}" />
+			        </p:column>
+			        <p:column headerText="Nome de Categoria" sortBy="#{cate.cate_nm_categoria}">
+			            <h:outputText value="#{cate.cate_nm_categoria}"/>
+			        </p:column>
+			    </p:dataTable>	   	   
+			 
+	   	    </div>
+	   	    <div id="btn_crud">
+	   	    	<p:commandButton styleClass="padrao_btn" value="Incluir" ajax="false" action="#{categoriaView.inserir()}"/>
+	   	    	&nbsp;
+	   	    	<p:commandButton styleClass="padrao_btn" value="Cancelar" action="#{categoriaView.retorna()}"/>
+	   	    </div>
+			<t:saveState value="#{categoriaView.filtro}"/>
+	   	    <t:saveState value="#{categoriaView.categoriaSel}"/>
+   			<t:saveState value="#{categoriaView.categorias}"/>
+		</h:form>
+	</ui:define>
+</ui:composition>

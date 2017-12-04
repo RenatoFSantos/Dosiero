@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="../template/_template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+
+	<ui:define name="conteudo">
+			<p:messages id="message_erro" severity="error" autoUpdate="true" closable="true" />
+	   	    <p:growl id="message_info" severity="info, warn" autoUpdate="true"/>
+	   	    <div id="barratitulo">
+	   	    	Relatório por Data de Digitação
+	   	    </div>
+			<h:form id="formedit" prependId="false">
+				<p:panel id="panelRel">
+					<h:panelGroup id="groupRel" layout="block" styleClass="ui-fluid" style="background-color: #ccc !important;">
+						<p:panelGrid columns="2" layout="grid" columnClasses="ui-grid-col-2, ui-grid-col-10">
+							<!-- UNIDADE -->
+							<p:outputLabel styleClass="padrao_lbl14 larg150 lblGrid" value="Unidade: " for="unid_ds_unidade" />
+							<h:panelGroup>
+								<p:inputText styleClass="padrao_txt larg500" id="unid_ds_unidade" value="#{acervoView.acervo.objUnidade.unid_nm_unidade}" required="true" readonly="true" requiredMessage="Unidade obrigatória!"/>
+					        	<p:commandButton styleClass="padrao_btn" ajax="true" action="#{acervoView.listaUnidades()}" title="Unidade"  update="unid_ds_unidade, und_dialog"  icon="ui-icon-search"></p:commandButton>
+						    </h:panelGroup>
+							<!-- SUBCLASSE -->
+							<p:outputLabel styleClass="padrao_lbl14 larg150 lblGrid" value="SubClasse: " for="clas_ds_nome"/>
+							<h:panelGroup>
+								<p:inputText styleClass="padrao_txt larg660" id="clas_ds_nome" value="#{acervoView.acervo.objClasse.clas_cd_classe} - #{acervoView.acervo.objClasse.clas_ds_nome}" readonly="true"/>
+					        	<p:commandButton styleClass="padrao_btn" ajax="true" action="#{acervoView.listaClasses()}" title="Classe"  update="clas_ds_nome, clas_dialog"  icon="ui-icon-search"></p:commandButton>
+						    </h:panelGroup>
+							<!-- PERIODO -->
+							<p:outputLabel styleClass="padrao_lbl14 larg150 lblGrid" value="Período: de " for="dat_ini_periodo" />
+							<h:panelGroup>
+								<p:calendar styleClass="padrao_txt larg150" id="dat_ini_periodo" size="11" mindate="01/01/2000" maxdate="31/12/2099" locale="pt_BR" pattern="dd/MM/yyyy" value="#{acervoView.dat_ini_periodo}"/>
+								<p:outputLabel styleClass="padrao_lbl14" value=" até "/>
+								<p:calendar styleClass="padrao_txt larg150" id="dat_fim_periodo" size="11" mindate="01/01/2000" maxdate="31/12/2099" locale="pt_BR" pattern="dd/MM/yyyy" value="#{acervoView.dat_fim_periodo}"/>
+							</h:panelGroup>
+							<!-- TIPO RELATORIO -->
+						    <p:outputLabel styleClass="padrao_lbl14 larg150 lblGrid" value="Tipo: " for="tp_rlt" />
+					        <p:selectOneMenu styleClass="padrao_txt larg200" id="tp_rlt" value="#{acervoView.tpRlt}" >
+					            <f:selectItem itemLabel="Digitação" itemValue="D" />
+					            <f:selectItem itemLabel="Completo" itemValue="C" />
+					        </p:selectOneMenu>
+							<!-- FORMATO RELATORIO (PDF-XLS) -->
+						    <p:outputLabel styleClass="padrao_lbl14 larg150 lblGrid" value="Formato: " for="opc_rlt" />
+					        <p:selectOneMenu styleClass="padrao_txt larg200" id="opc_rlt" value="#{acervoView.fmtRlt}" >
+					            <f:selectItem itemLabel="PDF" itemValue="PDF" />
+					            <f:selectItem itemLabel="XLS" itemValue="XLS" />
+					        </p:selectOneMenu>
+					   	</p:panelGrid>
+				 	</h:panelGroup>
+			 	</p:panel>
+		   	    <div id="btn_crud">
+		   	    	<p:commandButton styleClass="padrao_btn" value="Filtrar" ajax="false" action="#{acervoView.geraRelatorioDigitacao()}"/>
+		   	    	&nbsp;
+		   	    	<p:commandButton styleClass="padrao_btn" value="Cancelar" action="#{acervoView.retorna()}"/>
+		   	    </div>
+		   	</h:form>
+			<p:dialog id="und_dialog" header="Unidade" resizable="false" draggable="false" width="600" position="center" height="500" widgetVar="popUpUnidadeAcervo" modal="true" minHeight="40" minWidth="300">
+	    		<ui:include src="popUpUnidadeAcervo.xhtml"></ui:include>
+			</p:dialog>
+			<p:dialog id="clas_dialog" header="Classe" resizable="false" draggable="false" width="960" position="center" height="500" widgetVar="popUpClasseAcervo" modal="true" minHeight="40" minWidth="300">
+	    		<ui:include src="popUpClasseAcervo.xhtml"></ui:include>
+			</p:dialog>
+			<t:saveState value="#{acervoView.acervo}"/>
+	</ui:define> 
+</ui:composition>
+ 

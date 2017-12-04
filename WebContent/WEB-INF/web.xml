@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <listener>
+    <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
+  </listener>
+  <context-param>
+	<param-name>primefaces.SUBMIT</param-name>
+	<param-value>partial</param-value>
+  </context-param>  
+  <context-param>
+	<param-name>javax.faces.FACELETS_SKIP_COMMENTS</param-name>
+	<param-value>true</param-value>
+  </context-param>  
+  <context-param>
+    <param-name>javax.faces.DEFAULT_SUFFIX</param-name>
+    <param-value>.xhtml</param-value>
+  </context-param>
+  <context-param>
+    <param-name>javax.faces.PARTIAL_STATE_SAVING</param-name>
+    <param-value>true</param-value>
+  </context-param>
+  <context-param>
+    <param-name>primefaces.THEME</param-name>
+    <param-value>afterdark</param-value>
+  </context-param>
+  <context-param>
+    <param-name>javax.faces.CONFIG_FILES</param-name>
+    <param-value>/WEB-INF/faces-config.xml, /WEB-INF/faces-navigation.xml, /WEB-INF/faces-managed-beans.xml</param-value>
+  </context-param>
+  <context-param>
+    <param-name>com.sun.faces.expressionFactory</param-name>
+    <param-value>com.sun.el.ExpressionFactoryImpl</param-value>
+  </context-param>
+  <context-param>
+    <param-name>primefaces.UPLOADER</param-name>
+    <param-value>commons</param-value><!-- Allowed values: auto, native and commons. -->
+  </context-param>
+  <servlet>
+    <servlet-name>Resource Servlet</servlet-name>
+    <servlet-class>org.primefaces.resource.ResourceServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Faces Servlet</servlet-name>
+    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Faces Servlet</servlet-name>
+    <url-pattern>*.jsf</url-pattern>
+    <url-pattern>*.xhtml</url-pattern>
+    <url-pattern>*.faces</url-pattern>
+  </servlet-mapping>
+  <filter>  
+    <filter-name>PrimeFaces FileUpload Filter</filter-name>  
+    <filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>  
+    <init-param>
+		<param-name>thresholdSize</param-name>
+		<param-value>51200</param-value>
+	</init-param>
+  </filter>  
+  <filter-mapping>  
+    <filter-name>PrimeFaces FileUpload Filter</filter-name>  
+    <servlet-name>Faces Servlet</servlet-name>
+  </filter-mapping>  
+  <session-config>
+    <session-timeout>30</session-timeout>
+  </session-config>
+  <welcome-file-list>
+    <welcome-file>index.xhtml</welcome-file>
+  </welcome-file-list>
+  <mime-mapping>   
+    <extension>jpg</extension>   
+    <mime-type>image/jpeg</mime-type>   
+  </mime-mapping>   
+</web-app>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+	<h:body>
+		<h:form id="formdoc" enctype="multipart/form-data">
+			<p:messages id="message_erro" severity="error" autoUpdate="true" closable="true" />
+			<div id="doc" class="ui-fluid">
+				<h:panelGroup id="itemPanel" layout="block" styleClass="ui-fluid">
+					<p:panelGrid id="gridPanel" columns="2" layout="grid" columnClasses="ui-grid-col-2, ui-grid-col-10" style="padding-bottom: 10px;">
+						<!-- ID. DOCUMENTO -->
+						<p:outputLabel styleClass="padrao_lbl14" value="ID:"/>
+						<p:outputLabel styleClass="padrao_txt" value="#{acervoView.documento.id}"/>
+						<!-- DT. INCLUSÃO -->
+						<p:outputLabel styleClass="padrao_lbl14" value="Dt. Inclusão: " for="docu_dt_inclusao"/>
+						<p:calendar styleClass="padrao_txt" id="docu_dt_inclusao" size="11" mindate="01/01/2000" maxdate="31/12/2099" readonly="true" disabled="true" locale="pt_BR" pattern="dd/MM/yyyy" value="#{acervoView.documento.docu_dt_inclusao}" />
+						<!-- TÍTULO DO DOCUMENTO -->
+						<p:outputLabel styleClass="padrao_lbl14" value="Título: " for="docu_nm_documento"/>
+						<p:inputText styleClass="padrao_txt" style="width: 595px;" id="docu_nm_documento" required="true" requiredMessage="Título obrigatório. Verifique!" value="#{acervoView.documento.docu_nm_documento}"/>
+						<!-- CONTEÚDO -->
+						<p:outputLabel styleClass="padrao_lbl14" value="Conteúdo: " for="docu_tx_conteudo"/>
+	   					<p:inputTextarea id="docu_tx_conteudo" styleClass="padrao_txt" rows="3" cols="85" counter="disp_cont" maxlength="1000" counterTemplate="{0} caracteres restantes." autoResize="false" value="#{acervoView.documento.docu_tx_conteudo}" />
+	   					<br/>
+	   					<h:outputText styleClass="padrao_lbl11 contador" style="margin-top: -10px;" id="disp_cont" />
+						<!-- ARQUIVO VINCULADO -->
+						<p:outputLabel styleClass="padrao_lbl14" value="Arquivo: " for="docu_nm_arquivovinculado"/>
+						<p:inputText styleClass="padrao_txt" style="width: 595px;" id="docu_nm_arquivovinculado" disabled="true" readonly="true" value="#{acervoView.documento.docu_nm_arquivo}"/>
+						<!-- OBSERVACAO -->
+						<p:outputLabel styleClass="padrao_lbl14" value="Observações: " for="docu_tx_observacao"/>
+	   					<p:inputTextarea id="docu_tx_observacao" styleClass="padrao_txt" rows="3" cols="85" counter="disp_obs" maxlength="1000" counterTemplate="{0} caracteres restantes." autoResize="false" value="#{acervoView.documento.docu_tx_observacao}" />
+	   					<br/>
+	   					<h:outputText styleClass="padrao_lbl11 contador" style="margin-top: -10px;" id="disp_obs" />
+					</p:panelGrid>
+					<p:commandButton styleClass="padrao_btn" value="Salvar" action="#{acervoView.adicionarDocumento()}" update="formdoc, :formedit"/>
+		   	    	<p:commandButton styleClass="padrao_btn" process="@this" immediate="true" value="Cancelar" onclick="PF('popUpDocumento').hide();"/>
+				</h:panelGroup>
+			</div>
+			<t:saveState value="#{acervoView.documento}"/>
+		</h:form>
+	</h:body>
+</ui:composition>

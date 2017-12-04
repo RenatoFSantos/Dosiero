@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		
+		<!-- DESENVOLVIMENTO DOSIERO_DSV LOCAL -->
+		<!-- 
+		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>		
+		<property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/dosiero_dsv</property>
+		<property name="hibernate.connection.username">postgres</property>
+		<property name="hibernate.connection.password">adm</property>
+		 -->
+ 		
+		<!-- DESENVOLVIMENTO DOSIERO LOCAL - BASE MARGARETH -->
+		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>		
+		<property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/dosiero</property>
+		<property name="hibernate.connection.username">postgres</property>
+		<property name="hibernate.connection.password">adm</property>
+ 		 
+ 		<!-- DESENVOLVIMENTO CONTEMPORY -->
+ 		<!-- 
+		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>		
+		<property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/dosiero</property>
+		<property name="hibernate.connection.username">postgres</property>
+		<property name="hibernate.connection.password">PgSQL#16ds</property>
+		 -->
+
+		<!-- PRODUÇÃO KINGHOST -->
+		<!-- 		 
+  		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>		
+		<property name="hibernate.connection.url">jdbc:postgresql://pgsql01-farm60.kinghost.net:5432/dosiero</property>
+		<property name="hibernate.connection.username">dosiero</property>
+		<property name="hibernate.connection.password">novaDat9</property>
+		 -->
+
+		<!-- CONFIGURAÇÕES DO POOL -->
+ 		<property name="hibernate.hbm2ddl.auto">none</property>
+		<property name="hibernate.connection.autocommit">false</property>
+		<property name="hibernate.format_sql">false</property> 
+		<property name="hibernate.show_sql">false</property>
+		<property name="hibernate.current_session_context_class">thread</property>
+		<property name="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
+		<property name="hibernate.c3p0.acquire_increment">5</property>
+        <property name="hibernate.c3p0.min_size">5</property>
+        <property name="hibernate.c3p0.max_size">20</property>
+		<property name="hibernate.c3p0.max_statements">50</property>   
+        <property name="hibernate.c3p0.timeout">1800</property>
+  		<property name="hibernate.c3p0.idle_test_period">3000</property>
+  		<property name="hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
+		
+		<!-- MAPEAMENTO DOS OBJETOS -->
+		<mapping class="_model.vo.Acervo" />
+		<mapping class="_model.vo.AcervoDescritor" />
+		<mapping class="_model.vo.Boleto" />
+		<mapping class="_model.vo.Categoria" />
+		<mapping class="_model.vo.CategoriaTipo" />
+		<mapping class="_model.vo.Classe" />
+		<mapping class="_model.vo.Cliente" />
+		<mapping class="_model.vo.ClienteModulo" />
+		<mapping class="_model.vo.Descritor" />
+		<mapping class="_model.vo.Documento" />
+		<mapping class="_model.vo.Emprestimo" />
+		<mapping class="_model.vo.Modulo" />
+		<mapping class="_model.vo.Ocorrencia" />
+		<mapping class="_model.vo.Pagina" />
+		<mapping class="_model.vo.Perfil" />
+		<mapping class="_model.vo.PerfilPagina" />
+		<mapping class="_model.vo.Tipo" />
+		<mapping class="_model.vo.Unidade" />
+		<mapping class="_model.vo.Usuario" />
+		<mapping class="_model.vo.Parametro" />
+	</session-factory>
+</hibernate-configuration>

@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Rel_AcervoXLocal" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="BlankPage" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="04f712ca-5184-417c-970d-82399a2265e2">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="602"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Status_FC" mode="Transparent" forecolor="#FF0000" backcolor="#808080" markup="styled" fontName="Arial" fontSize="10" isItalic="false" isUnderline="false" isStrikeThrough="false">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{unddto_in_status}=="FC"]]></conditionExpression>
+			<style mode="Transparent"/>
+		</conditionalStyle>
+	</style>
+	<style name="Status_FI" mode="Transparent" forecolor="#FFC800" backcolor="#808080" markup="styled" fontName="Arial" fontSize="10" isItalic="false" isUnderline="false" isStrikeThrough="false">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{unddto_in_status}=="FI"]]></conditionExpression>
+			<style mode="Transparent"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="Logo" class="java.lang.String"/>
+	<parameter name="DataIni" class="java.util.Date"/>
+	<parameter name="DataFim" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[id]]></fieldDescription>
+	</field>
+	<field name="unddto_cd_classe" class="java.lang.String">
+		<fieldDescription><![CDATA[unddto_cd_classe]]></fieldDescription>
+	</field>
+	<field name="unddto_ds_assunto" class="java.lang.String">
+		<fieldDescription><![CDATA[unddto_ds_assunto]]></fieldDescription>
+	</field>
+	<field name="unddto_ds_classe" class="java.lang.String">
+		<fieldDescription><![CDATA[unddto_ds_classe]]></fieldDescription>
+	</field>
+	<field name="unddto_ds_localarquivo" class="java.lang.String">
+		<fieldDescription><![CDATA[unddto_ds_localarquivo]]></fieldDescription>
+	</field>
+	<field name="unddto_dt_finalvigencia" class="java.util.Date">
+		<fieldDescription><![CDATA[unddto_dt_finalvigencia]]></fieldDescription>
+	</field>
+	<field name="unddto_in_documento" class="java.lang.String">
+		<fieldDescription><![CDATA[unddto_in_documento]]></fieldDescription>
+	</field>
+	<field name="unddto_in_status" class="java.lang.String">
+		<fieldDescription><![CDATA[unddto_in_status]]></fieldDescription>
+	</field>
+	<field name="unddto_nm_unidade" class="java.lang.String">
+		<fieldDescription><![CDATA[unddto_nm_unidade]]></fieldDescription>
+	</field>
+	<field name="unddto_nr_fasecorrente" class="java.lang.Integer">
+		<fieldDescription><![CDATA[unddto_nr_fasecorrente]]></fieldDescription>
+	</field>
+	<field name="unddto_sg_sigla" class="java.lang.String">
+		<fieldDescription><![CDATA[unddto_sg_sigla]]></fieldDescription>
+	</field>
+	<field name="unddto_tx_destinacaofinal" class="java.lang.String">
+		<fieldDescription><![CDATA[unddto_tx_destinacaofinal]]></fieldDescription>
+	</field>
+	<field name="unddto_tx_fasecorrente" class="java.lang.String">
+		<fieldDescription><![CDATA[unddto_tx_fasecorrente]]></fieldDescription>
+	</field>
+	<field name="unddto_tx_faseintermediaria" class="java.lang.String">
+		<fieldDescription><![CDATA[unddto_tx_faseintermediaria]]></fieldDescription>
+	</field>
+	<field name="unddto_tx_observacao" class="java.lang.String">
+		<fieldDescription><![CDATA[unddto_tx_observacao]]></fieldDescription>
+	</field>
+	<group name="Unidade">
+		<groupExpression><![CDATA[$F{unddto_nm_unidade}]]></groupExpression>
+		<groupHeader>
+			<band height="1"/>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="105" splitType="Stretch">
+			<staticText>
+				<reportElement x="385" y="6" width="415" height="25" uuid="b961aefc-eae5-449c-87b4-0d52bb4c96a8"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Acervo por Local]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="100" height="40" uuid="9ffd42ae-e7c5-4636-be93-fc2489b9e744"/>
+				<imageExpression><![CDATA[$P{Logo}]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="0" y="56" width="800" height="1" uuid="aa1401c7-ee55-4181-9d8b-dd72c58dc132"/>
+			</line>
+			<textField>
+				<reportElement x="61" y="60" width="86" height="20" uuid="e2b36f69-f6f2-4162-977e-3048b224cbaf"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{unddto_sg_sigla}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="147" y="60" width="651" height="20" uuid="ddabff25-e1ac-4c4a-9d07-011f715ceaa9"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{unddto_nm_unidade}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="60" width="61" height="20" uuid="58efd6da-4222-43c4-92c6-affd5a2fca45"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Unidade:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="83" width="61" height="20" uuid="36bea20c-2a95-4d14-82ac-109577ca8b01"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Período:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="61" y="83" width="70" height="20" uuid="812df7f2-0029-482c-a2ed-ae096918a139"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DataIni}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="167" y="83" width="70" height="20" uuid="60887fcf-4036-49f2-a45d-7dc5ff317da8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DataFim}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="131" y="83" width="36" height="20" uuid="199eb692-7061-4761-95e7-6d6cd334d095"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[até]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="28" splitType="Stretch">
+			<rectangle>
+				<reportElement x="1" y="0" width="800" height="28" forecolor="#FFFFFF" backcolor="#666666" uuid="a466a73b-87f1-4754-ba05-b237a9bbd836"/>
+			</rectangle>
+			<staticText>
+				<reportElement mode="Opaque" x="72" y="4" width="60" height="20" uuid="151e2e46-d837-40e6-a0b3-917e9bb32087"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Subclasse]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="133" y="4" width="160" height="20" uuid="9d14b818-2f1a-4211-99c6-f7ad8eed9468"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Título]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="294" y="4" width="160" height="20" uuid="917e8c1a-f1d9-4bc8-bc9b-656f0cb1de60"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Assunto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="455" y="4" width="70" height="20" uuid="4346869e-c722-43e4-ba11-014a56cf4337"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FC]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="526" y="4" width="70" height="20" uuid="be5990ac-e241-45b3-be38-3359134cf3fa"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="597" y="4" width="69" height="20" uuid="173b22e3-1ebb-4792-b99c-4feb5034d857"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DF]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="667" y="4" width="30" height="20" uuid="efa609b5-0039-4eb9-a563-13c8d76dc1d4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Doc.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="698" y="4" width="100" height="20" uuid="c3bd334f-2568-4c56-acb5-9e398225196a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Observações]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="3" y="4" width="68" height="20" uuid="d79574a4-5627-4d4b-a80a-1f517ecfd14d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Local]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="17" splitType="Stretch">
+			<rectangle>
+				<reportElement stretchType="RelativeToTallestObject" x="1" y="0" width="799" height="16" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="cd584d66-f6af-41c3-a3b3-7e13b8ef8f76">
+					<printWhenExpression><![CDATA[new Boolean(($V{COLUMN_COUNT}.intValue() % 2) == 0)]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="72" y="0" width="57" height="15" uuid="a2df7ba7-30c0-4e75-bd71-03de0fbcf811"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{unddto_cd_classe}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="133" y="0" width="160" height="15" uuid="fc002a0a-04f2-4ea1-8727-08075af72cf5"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{unddto_ds_classe}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="294" y="0" width="160" height="15" uuid="2e1f122f-d8b5-436a-b5b6-cfdd969135db"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{unddto_ds_assunto}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement mode="Transparent" x="455" y="0" width="70" height="15" forecolor="#000000" backcolor="#CCCCCC" uuid="c6db7223-0fe8-4540-9eaf-6a33bc4d4857"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{unddto_in_status}=="FC" ?
+$F{unddto_tx_fasecorrente}=="STP" ? "<style forecolor='#CC0000'>--</style>"  :
+$F{unddto_tx_fasecorrente}=="EVG" ? "<style forecolor='#CC0000'>Enquanto vigora</style>" :
+$F{unddto_tx_fasecorrente}=="HMA" ? "<style forecolor='#CC0000'>Até homologação do ato</style>" :
+$F{unddto_tx_fasecorrente}=="HME" ? "<style forecolor='#CC0000'>Até homologação do evento</style>" :
+$F{unddto_tx_fasecorrente}=="CEV" ? "<style forecolor='#CC0000'>Até a conclusão do evento</style>" :
+$F{unddto_tx_fasecorrente}=="MVI" ? "<style forecolor='#CC0000'>Enquanto o aluno mantiver vínculo com a IE</style>" :
+$F{unddto_tx_fasecorrente}=="CCA" ? "<style forecolor='#CC0000'>Até a conclusão do caso</style>" :
+$F{unddto_tx_fasecorrente}=="DRN" ? "<style forecolor='#CC0000'>Devolução ao aluno após registro de notas</style>" :
+$F{unddto_tx_fasecorrente}=="CCU" ? "<style forecolor='#CC0000'>Até a conclusão do curso</style>" :
+$F{unddto_tx_fasecorrente}=="RNT" ? "<style forecolor='#CC0000'>Até o registro de notas</style>" :
+$F{unddto_tx_fasecorrente}=="CCT" ? "<style forecolor='#CC0000'>Até a celebração do contrato</style>" :
+"<style forecolor='#CC0000'>" + $F{unddto_nr_fasecorrente} + "Ano(s)</style>"
+:
+$F{unddto_tx_fasecorrente}=="STP" ? "--" :
+$F{unddto_tx_fasecorrente}=="EVG" ? "Enquanto vigora" :
+$F{unddto_tx_fasecorrente}=="HMA" ? "Até homologação do ato" :
+$F{unddto_tx_fasecorrente}=="HME" ? "Até homologação do evento" :
+$F{unddto_tx_fasecorrente}=="CEV" ? "Até a conclusão do evento" :
+$F{unddto_tx_fasecorrente}=="MVI" ? "Enquanto o aluno mantiver vínculo com a IE" :
+$F{unddto_tx_fasecorrente}=="CCA" ? "Até a conclusão do caso" :
+$F{unddto_tx_fasecorrente}=="DRN" ? "Devolução ao aluno após registro de notas" :
+$F{unddto_tx_fasecorrente}=="CCU" ? "Até a conclusão do curso" :
+$F{unddto_tx_fasecorrente}=="RNT" ? "Até o registro de notas" :
+$F{unddto_tx_fasecorrente}=="CCT" ? "Até a celebração do contrato" :
+$F{unddto_nr_fasecorrente} + " Ano(s)"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="526" y="0" width="70" height="15" forecolor="#000000" uuid="0b170bfd-0cfb-4574-99b1-213a0f6d591a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{unddto_in_status}=="FI" ?
+"<style forecolor='#CC0000'>" + $F{unddto_tx_faseintermediaria} + " Ano(s)</style>"
+:
+$F{unddto_tx_faseintermediaria} + " Ano(s)"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="597" y="0" width="70" height="15" uuid="3580d061-dcef-4123-8abd-7d3c8fa21733"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{unddto_in_status}=="DF" ?
+$F{unddto_tx_destinacaofinal}=="STP" ? "<style forecolor='#CC0000'>--</style>" :
+$F{unddto_tx_destinacaofinal}=="GDP" ? "<style forecolor='#CC0000'>Guarda permanente</style>" :
+$F{unddto_tx_destinacaofinal}=="ELM" ? "<style forecolor='#CC0000'>Eliminação</style>" : "<style forecolor='#CC0000'>--</style>"
+:
+$F{unddto_tx_destinacaofinal}=="STP" ? "--" :
+$F{unddto_tx_destinacaofinal}=="GDP" ? "Guarda permanente" :
+$F{unddto_tx_destinacaofinal}=="ELM" ? "Eliminação" : "--"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="667" y="0" width="31" height="15" uuid="58cf44dc-ceeb-4a53-9ae3-1d68ffeda5d2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{unddto_in_documento}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="698" y="0" width="100" height="15" uuid="daed7989-0450-4d24-93d3-8ff2c4b59b69"/>
+				<textElement verticalAlignment="Middle" markup="styled">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{unddto_tx_observacao}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="2" y="0" width="69" height="15" uuid="902591bb-d663-467b-b9a1-27b6409cb966"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{unddto_ds_localarquivo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="734" y="4" width="65" height="15" uuid="b1680504-99b2-4794-8ff9-d2000b618907"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="2" width="800" height="1" uuid="19617019-03c7-4f58-b225-a82d61f456fb"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="3" width="93" height="15" uuid="b334a909-8019-4bfc-b2db-a32d8911206c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[DOSIERO - Emitido em:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy HH:mm:ss">
+				<reportElement positionType="FixRelativeToBottom" x="99" y="3" width="256" height="15" uuid="ed9df0a4-f1d0-497a-99a4-3b127ab8a1bd"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date())]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="18">
+			<staticText>
+				<reportElement x="0" y="0" width="93" height="15" uuid="117f9ce4-810d-4fd9-ba3a-7d92117a72d9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<text><![CDATA[Total de registros:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="93" y="0" width="54" height="15" uuid="33a5858a-aadf-4bd8-afe1-e3ff6e697143"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+</jasperReport>

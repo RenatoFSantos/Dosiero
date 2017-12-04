@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="../template/_template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+
+	<ui:define name="conteudo">
+		<h:form id="formlista" prependId="true">
+			<p:messages id="message_erro" severity="error" autoUpdate="true" closable="true" />
+	   	    <p:growl id="message_info" severity="info, warn" autoUpdate="true"/>
+	   	    <div id="barratitulo">
+	   	    	Cadastro de Usuário
+	   	    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	   	    	<p:outputLabel styleClass="padrao_lbl14" value="Filtrar por Nome: " for="txt_pesquisa"/>
+	   	    	<p:inputText id="txt_pesquisa" styleClass="padrao_txt" value="#{usuarioView.filtro.usua_nm_usuario}" size="60"/>&nbsp;
+				<p:commandButton styleClass="padrao_btn" value="Pesquisar" action="#{usuarioView.pesquisar()}" update="tbUsuarios" />
+	   	    </div>
+	   	    <div>
+			    <p:dataTable id="tbUsuarios" var="usu" value="#{usuarioView.usuarios}" rows="10" paginator="true">
+			        <p:column width="80">
+			        	<p:commandButton id="btn_editar" title="editar" action="#{usuarioView.editar()}" ajax="false" icon="ui-icon-pencil">
+			        		<f:setPropertyActionListener value="#{usu}" target="#{usuarioView.usuarioSel}"/>
+			        	</p:commandButton>
+    					<p:commandButton id="btn_excluir" title="excluir" action="#{usuarioView.excluir()}" icon="ui-icon-closethick" update="tbUsuarios">
+				        	<f:setPropertyActionListener value="#{usu}" target="#{usuarioView.usuarioSel}"/>
+						    <p:confirm header="Confirma exclusão?" message="Usuário: #{usu.usua_cd_matricula}" icon="ui-icon-alert"/>
+    					</p:commandButton>
+					    <p:confirmDialog global="true">
+						       <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+						       <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+					    </p:confirmDialog>
+			        </p:column>			        
+			        <p:column headerText="Id" width="40" style="text-align: center;">	
+			            <h:outputText value="#{usu.id}" />
+			        </p:column>
+			        <p:column headerText="Matrícula" width="100" style="text-align: center;">	
+			            <h:outputText value="#{usu.usua_cd_matricula}" />
+			        </p:column>
+			 
+			        <p:column headerText="Nome de Usuario">
+			            <h:outputText value="#{usu.usua_nm_usuario}" />
+			        </p:column>
+			    </p:dataTable>	   	    
+	   	    </div>
+	   	    <div id="btn_crud">
+	   	    	<p:commandButton styleClass="padrao_btn" value="Incluir" ajax="false" action="#{usuarioView.inserir()}"/>
+	   	    	&nbsp;
+	   	    	<p:commandButton styleClass="padrao_btn" value="Cancelar" action="#{usuarioView.retorna()}"/>
+	   	    </div>
+			<t:saveState value="#{usuarioView.filtro}"/>
+	   	    <t:saveState value="#{usuarioView.usuario}"/>
+   			<t:saveState value="#{usuarioView.usuarios}"/>
+		</h:form>
+	</ui:define>
+</ui:composition>

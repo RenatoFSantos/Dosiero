@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="../template/_template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+
+	<ui:define name="conteudo">
+			<p:messages id="message_erro" severity="error" autoUpdate="true" closable="true" />
+	   	    <p:growl id="message_info" severity="info, warn" autoUpdate="true"/>
+	   	    <div id="barratitulo">
+	   	    	Importação de Dados
+	   	    </div>
+			<h:form id="formEntrada" prependId="false" enctype="multipart/form-data">
+				<p:panel id="panelEntrada">
+					<h:panelGroup id="groupEntrada" layout="block" styleClass="ui-fluid" style="background-color: #ccc !important;">
+						<p:panelGrid columns="2" layout="grid" columnClasses="ui-grid-col-2, ui-grid-col-10">
+							<!-- BUSCA A PLANILHA EXCEL -->
+							<p:outputLabel styleClass="padrao_lbl14 larg150 lblGrid" value="Nome da planilha (XLS): "/>
+							<p:fileUpload value="#{importaXLSView.arquivo}" label="Selecionar Planilha..." mode="simple" skinSimple="true"/>
+							<!-- LISTA DE CLIENTE -->
+						    <p:outputLabel styleClass="padrao_lbl14 larg150 lblGrid" value="Cliente: " for="listacliente" />
+					        <p:selectOneMenu id="listacliente" var="cl" value="#{importaXLSView.objCliente}" required="true" requiredMessage="Cliente obrigatório!" converter="clienteConverter"  styleClass="padrao_txt larg600">
+					        	<f:selectItem itemLabel="Selecione um Cliente..." itemValue=""/>
+					        	<f:selectItems var="clie" value="#{importaXLSView.clientes}"  itemLabel="#{clie.clie_nm_fantasia}" itemValue="#{clie}" />
+					            <p:column>
+					                <h:outputText value="#{cl.clie_nm_fantasia}"/>
+					            </p:column>
+					        </p:selectOneMenu>
+							<!-- LISTA DE TABELAS -->
+						    <p:outputLabel styleClass="padrao_lbl14 larg150 lblGrid" value="Tipo de informação: " for="impo_tp_informacao" />
+					        <p:selectOneMenu styleClass="padrao_txt larg150" id="impo_tp_informacao" value="#{importaXLSView.tipoInformacao}" >
+					            <f:selectItem itemLabel="Acervo" itemValue="acervo" />
+					            <f:selectItem itemLabel="Descritor" itemValue="descritor" />
+					            <f:selectItem itemLabel="Documento" itemValue="documento" />
+					        </p:selectOneMenu>
+					   	</p:panelGrid>
+				 	</h:panelGroup>
+			 	</p:panel>
+		   	    <div>
+				    <p:dataTable id="tbImportacao" var="imp" value="#{importaXLSView.acervoDTOs}" rows="10" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom" emptyMessage="Nenhum registro importado." scrollable="true" scrollWidth="960">
+				        <p:column width="40">
+	    					<p:commandButton id="btn_excluir" title="excluir" action="#{importaXLSView.excluir()}" icon="ui-icon-closethick" update="tbImportacao">
+					        	<f:setPropertyActionListener value="#{imp}" target="#{importaXLSView.importaSel}"/>
+							    <p:confirm  header="Confirmação"  message="Deseja excluir este registro?"  icon="ui-icon-alert"/>
+	    					</p:commandButton>
+	    					<p:confirmDialog global="true" >
+							       <p:commandButton value="Sim"  type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+							       <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+						    </p:confirmDialog> 
+	 			        </p:column>			        
+				        <p:column headerText="Id" width="60" style="text-align: center;" sortBy="#{imp.id}">	
+				            <h:outputText value="#{imp.id}" />
+				        </p:column>
+				        <p:column headerText="Unidade" width="100">
+				            <h:outputText value="#{imp.objUnidade.unid_nm_unidade}"/>
+				        </p:column>
+				        <p:column headerText="Classe" width="280">
+				            <h:outputText value="#{imp.objClasse.clas_ds_nome}"/>
+				        </p:column>
+				        <p:column headerText="Assunto" sortBy="#{imp.acer_ds_assunto}" width="300">
+				            <h:outputText value="#{imp.acer_ds_assunto}" />
+				        </p:column>
+				        <p:column headerText="Fase Atual" width="100">
+				            <h:outputText value="#{imp.acer_in_status}" />
+				        </p:column>
+				        <p:column headerText="Dt. Referência" width="150">
+				            <h:outputText value="#{imp.acer_dt_referencia}">
+				            	<f:convertDateTime pattern="dd/MM/yyyy"/>
+				            </h:outputText>
+				        </p:column>
+				        <p:column headerText="Dt. Final Vigência" width="150">
+				            <h:outputText value="#{imp.acer_dt_finalvigencia}">
+				            	<f:convertDateTime pattern="dd/MM/yyyy"/>
+				            </h:outputText>
+				        </p:column>
+				        <p:column headerText="Localização Arquivo" width="300">
+				            <h:outputText value="#{imp.acer_ds_localarquivo}"/>
+				        </p:column>
+				        <p:column headerText="Observação" width="500">
+				            <h:outputText value="#{imp.acer_tx_observacao}"/>
+				        </p:column>
+				    </p:dataTable>	   	   
+		   	    </div>
+		   	    <div id="btn_crud">
+		   	    	<p:commandButton styleClass="padrao_btn" value="Importar" ajax="false" disabled="#{importaXLSView.flagImportar}" action="#{importaXLSView.importaXLS}" update="tbImportacao"/>
+		   	    	&nbsp;
+		   	    	<p:commandButton styleClass="padrao_btn" value="Salvar na Base de Dados" ajax="false" action="#{importaXLSView.salvar}" update="tbImportacao"/>
+		   	    	&nbsp;
+		   	    	<p:commandButton styleClass="padrao_btn" value="Cancelar" action="#{importaXLSView.retorna}"/>
+		   	    </div>
+		   	</h:form>
+			<t:saveState value="#{importaXLSView.arquivo}"/>
+			<t:saveState value="#{importaXLSView.objCliente}"/>
+			<t:saveState value="#{importaXLSView.clientes}"/>
+			<t:saveState value="#{importaXLSView.acervoDTOs}"/>
+			<!-- DIALOGO DE PROCESSAMENTO -->
+			<p:ajaxStatus onstart="PF('statusDialog').show();" onsuccess="PF('statusDialog').hide();" />
+			<p:dialog styleClass="dialogo" modal="true" widgetVar="statusDialog" draggable="false" resizable="false" closable="false" showHeader="false">
+				<h:graphicImage library="img" name="ajax-loader.gif"/>
+			</p:dialog>
+	</ui:define> 
+</ui:composition>
+ 

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="../template/_template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+
+	<ui:define name="conteudo">
+		<h:form id="formedit">
+			<p:messages id="message_erro" severity="error" autoUpdate="true" closable="true" />
+	   	    <p:growl id="message_info" severity="info, warn" autoUpdate="true"/>
+	   	    <div id="barratitulo">
+	   	    	Cadastro de Usuário
+	   	    </div>
+	   	    <div id="formcadastro">
+	   	    	<p:fieldset styleClass="ui-widget-content">
+						<p:outputLabel styleClass="padrao_lbl14 lbl_col1" value="ID:"/>
+						<p:outputLabel styleClass="padrao_txt" value="#{usuarioView.usuario.id}"/>
+						<br/>
+						<p:outputLabel styleClass="padrao_lbl14 lbl_col1" value="Matrícula: " for="usua_cd_matricula"/>
+						<p:inputText styleClass="padrao_txt larg100" id="usua_cd_matricula" value="#{usuarioView.usuario.usua_cd_matricula}" required="true" requiredMessage="Matrícula obrigatória!"/>
+						<br/>
+						<p:outputLabel styleClass="padrao_lbl14 lbl_col1" value="Nome do Usuário: " for="usua_nm_usuario"/>
+						<p:inputText styleClass="padrao_txt txt_nm_usuario" id="usua_nm_usuario" value="#{usuarioView.usuario.usua_nm_usuario}" required="true" requiredMessage="Nome obrigatório!"/>
+						<br/>
+						<p:outputLabel styleClass="padrao_lbl14 lbl_col1" value="Login: " for="usua_tx_login"/>
+						<p:inputText styleClass="padrao_txt larg100" id="usua_tx_login" value="#{usuarioView.usuario.usua_tx_login}" required="true" requiredMessage="Login obrigatório!"/>
+						
+						<p:outputLabel styleClass="padrao_lbl14 lbl_col3" value="Senha: " for="usua_tx_senha"/>
+						<p:inputText styleClass="padrao_txt larg100" id="usua_tx_senha" type="password" value="#{usuarioView.usuario.usua_tx_senha}" required="true" requiredMessage="Senha obrigatória!"/>
+						<br/>
+						<p:outputLabel styleClass="padrao_lbl14 lbl_col1" value="Categoria: " for="cate_nm_categoria"/>
+						<p:inputText styleClass="padrao_txt larg200" id="cate_nm_categoria" value="#{usuarioView.usuario.objCategoria.cate_nm_categoria}" required="true" readonly="true" requiredMessage="Categoria obrigatória!"/>
+						<p:commandButton styleClass="padrao_btn" ajax="true" onclick="PF('popUpCategoria').show();" title="Categoria"  update="cate_nm_categoria"  icon="ui-icon-search"></p:commandButton>
+						<br/>
+						<p:outputLabel styleClass="padrao_lbl14 lbl_col1" value="Cargo: " for="usua_ds_cargo"/>
+						<p:inputText styleClass="padrao_txt larg200" id="usua_ds_cargo" value="#{usuarioView.usuario.usua_ds_cargo}"/>
+						<br/>
+						<p:outputLabel styleClass="padrao_lbl14 lbl_col1" value="Unidade: " for="unid_ds_unidade"/>
+						<p:inputText styleClass="padrao_txt larg200" id="unid_ds_unidade" value="#{usuarioView.usuario.objUnidade.unid_nm_unidade}" required="true" readonly="true" requiredMessage="Unidade obrigatória!"/>
+						<p:commandButton styleClass="padrao_btn" ajax="true" onclick="PF('popUpUnidade').show();" title="Unidade"  update="unid_ds_unidade"  icon="ui-icon-search"></p:commandButton>
+						<br/>
+						<p:outputLabel styleClass="padrao_lbl14 lbl_col1" value="Perfil de Acesso: " for="perf_ds_perfil"/>
+						<p:inputText styleClass="padrao_txt larg200" id="perf_ds_perfil" value="#{usuarioView.usuario.objPerfil.perf_nm_perfil}" required="true" readonly="true" requiredMessage="Perfil de acesso obrigatório!"/>
+						<p:commandButton styleClass="padrao_btn" ajax="true" onclick="PF('popUpPerfil').show();" title="Perfil"  update="perf_ds_perfil"  icon="ui-icon-search"></p:commandButton>
+						<br/>
+						<p:outputLabel styleClass="padrao_lbl14 lbl_col1" value="Setor: " for="usua_ds_setor"/>
+						<p:inputText styleClass="padrao_txt larg200" id="usua_ds_setor" value="#{usuarioView.usuario.usua_ds_setor}"/>
+						<br/>
+						<p:outputLabel styleClass="padrao_lbl14 lbl_col1" value="Sexo: " for="usua_ds_sexo"/>
+			            <p:selectOneMenu id="usua_ds_sexo" value="#{usuarioView.usuario.usua_ds_sexo}"  style="width:50px">
+			                <f:selectItem itemLabel="M" itemValue="M"/>
+			                <f:selectItem itemLabel="F" itemValue="F"/>
+			            </p:selectOneMenu>
+						<br/>
+						<p:outputLabel styleClass="padrao_lbl14 lbl_col1" value="Situação: " for="usua_in_situacao"/>
+			            <p:selectOneMenu id="usua_in_situacao" value="#{usuarioView.usuario.usua_in_situacao}"  style="width:100px">
+			                <f:selectItems var="item" value="#{commonsView.situacoes}" itemLabel="#{item.nome}" />
+			            </p:selectOneMenu>	
+						<br/>
+						<p:outputLabel styleClass="padrao_lbl14 lbl_col1" value="Início de Suspensão: " for="usua_dt_suspensao"/>
+						<p:calendar styleClass="padrao_txt" id="usua_dt_suspensao" size="11" mindate="01/01/2000" maxdate="31/12/2099" locale="pt_BR" pattern="dd/MM/yyyy" value="#{usuarioView.usuario.usua_dt_suspensao}" />
+						
+						<p:outputLabel styleClass="padrao_lbl14 lbl_col2" value="Fim de Suspensão: " for="usua_dt_fimsuspensao"/>
+						<p:calendar styleClass="padrao_txt" id="usua_dt_fimsuspensao" size="11" mindate="01/01/2000" maxdate="31/12/2099"  locale="pt_BR" pattern="dd/MM/yyyy" value="#{usuarioView.usuario.usua_dt_fimsuspensao}" />
+						<br/>
+
+						<p:outputLabel styleClass="padrao_lbl14 lbl_col1" value="Incluído em: " for="usua_dt_inclusao"/>
+						<p:inputText styleClass="padrao_txt larg82" id="usua_dt_inclusao" value="#{usuarioView.usuario.usua_dt_inclusao}" disabled="true">
+							<f:convertDateTime pattern="dd/MM/yyyy"/>
+						</p:inputText>
+
+						<p:outputLabel styleClass="padrao_lbl14 lbl_col2" value="Excluído em: " for="usua_dt_exclusao"/>
+						<p:inputText styleClass="padrao_txt larg82" id="usua_dt_exclusao" value="#{usuarioView.usuario.usua_dt_exclusao}" disabled="true">
+							<f:convertDateTime pattern="dd/MM/yyyy"/>
+						</p:inputText>
+						<br/>
+
+						<p:outputLabel styleClass="padrao_lbl14 lbl_col1" value="Telefones: " for="usua_ds_telefone"/>
+						<p:inputText styleClass="padrao_txt larg500" id="usua_ds_telefone" value="#{usuarioView.usuario.usua_ds_telefone}" maxlength="30"/>
+						<br/>
+						<p:outputLabel styleClass="padrao_lbl14 lbl_col1" value="Email: " for="usua_ds_email"/>
+						<p:inputText styleClass="padrao_txt larg500" id="usua_ds_email" value="#{usuarioView.usuario.usua_ds_email}"/>
+						<br/>
+						<p:outputLabel styleClass="padrao_lbl14 lbl_col1" value="Foto: " for="usua_tx_foto"/>
+						<p:inputText styleClass="padrao_txt larg500" id="usua_tx_foto" value="#{usuarioView.usuario.usua_tx_foto}" readonly="true"/>
+						<p:commandButton id="btn_foto" styleClass="padrao_btn" process="@this" update="usua_tx_foto" icon="ui-icon-person" action="#{usuarioView.uploadDialog}"/>
+						<br/>
+						<p:outputLabel styleClass="padrao_lbl14 bloco" value="Endereço para correspondência: " for="usua_ds_correspondencia"/>
+    					<p:inputTextarea id="usua_ds_correspondencia" styleClass="padrao_txt" rows="4" cols="80" counter="disp_end" maxlength="200" counterTemplate="{0} caracteres restantes." autoResize="false" value="#{usuarioView.usuario.usua_ds_correspondencia}" />
+						<h:outputText styleClass="padrao_lbl11 contador" id="disp_end" />
+
+						<p:outputLabel styleClass="padrao_lbl14 bloco" value="Observações: " for="usua_tx_observacao"/>
+    					<p:inputTextarea id="usua_tx_observacao" styleClass="padrao_txt" rows="2" cols="80" counter="disp_obs" maxlength="100" counterTemplate="{0} caracteres restantes." autoResize="false" value="#{usuarioView.usuario.usua_tx_observacao}" />
+						<h:outputText styleClass="padrao_lbl11 contador" id="disp_obs" />
+				</p:fieldset>
+				<p:commandButton styleClass="padrao_btn" value="Salvar" action="#{usuarioView.salvar()}" update="formedit" style="margin-top: 10px;"/>
+	   	    	<p:commandButton styleClass="padrao_btn" process="@this" update="@form" immediate="true" value="Cancelar" action="#{usuarioView.listaUsuarios()}"/>
+		   	</div>
+		</h:form>
+		<p:dialog header="Unidade" resizable="false" draggable="false" width="600" position="center" height="500" widgetVar="popUpUnidade" modal="true" minHeight="40">
+    		<ui:include src="popUpUnidade.xhtml"></ui:include>
+		</p:dialog>
+		<p:dialog header="Perfil" resizable="false" draggable="false" width="600" position="center" height="500" widgetVar="popUpPerfil" modal="true" minHeight="40">
+    		<ui:include src="popUpPerfil.xhtml"></ui:include>
+		</p:dialog>
+		<p:dialog id="categoria_dialog" header="Categoria" resizable="false" draggable="false" width="600" position="center" height="500" widgetVar="popUpCategoria" modal="true" minHeight="40">
+    		<ui:include src="popUpCategoria.xhtml"></ui:include>
+		</p:dialog>
+	   	<p:dialog header="Upload Arquivo" resizable="false" draggable="false" width="900" position="center" widgetVar="popUpUpload" modal="true" minHeight="40" minWidth="300">
+   			<ui:include src="popUpUpload.xhtml"></ui:include>
+		</p:dialog>
+   	    <t:saveState value="#{usuarioView.usuario}"/>
+    	<t:saveState value="#{usuarioView.filtro}"/>
+		<t:saveState value="#{usuarioView.usuarios}"/>
+	</ui:define>
+</ui:composition>

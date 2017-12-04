@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+	<h:body>
+		<h:form id="formPaginas">
+			<p:dataTable id="tbPaginas" var="pagi" value="#{perfilView.paginas}" selection="#{perfilView.pagselecionadas}" rowKey="#{pagi.id}">
+				<p:ajax event="rowSelectCheckbox" update="@form" />
+				<p:ajax event="rowUnselectCheckbox" update="@form" />
+				<p:ajax event="rowSelect" update="@form" />
+				<p:ajax event="rowUnselect" update="@form" />
+				<p:ajax event="toggleSelect" update="@form" />
+				<p:column selectionMode="multiple" style="width:16px;text-align:center"/>
+		        <p:column headerText="Id" width="10%" style="text-align: center;">	
+		            <h:outputText value="#{pagi.id}" />
+		        </p:column>
+		        <p:column headerText="Nome de Modulo">
+		            <h:outputText value="#{pagi.pagi_nm_pagina}"/>
+		        </p:column>
+		        <p:column headerText="Total" width="50" style="text-align: center;">
+					<p:selectBooleanCheckbox id="ace_total" styleClass="padrao_txt" value="#{pagi.pagi_in_acesso_total}"/>
+		        </p:column>
+		        <p:column headerText="Leitura" width="50" style="text-align: center;">
+					<p:selectBooleanCheckbox id="ace_leitura" styleClass="padrao_txt" value="#{pagi.pagi_in_acesso_leitura}"/>
+		        </p:column>
+		        <p:column headerText="Escrita" width="50" style="text-align: center;">
+					<p:selectBooleanCheckbox id="ace_escrita" styleClass="padrao_txt" value="#{pagi.pagi_in_acesso_escrita}"/>
+		        </p:column>
+		        <p:column headerText="Exclusão" width="50" style="text-align: center;">
+					<p:selectBooleanCheckbox id="ace_exclusao" styleClass="padrao_txt"   value="#{pagi.pagi_in_acesso_exclusao}"/>
+		        </p:column>
+		    </p:dataTable>
+			<div class="tab larg500">
+				<div class="lbl_col">
+					<p:commandButton styleClass="padrao_btn" value="Fechar" actionListener="#{perfilView.atualizaPagina()}" oncomplete="PF('popUpPerfilPagina').hide();" update=":formedit:tbPerfilPaginas"/>
+				</div>
+			</div>
+   		</h:form>
+	</h:body>
+</ui:composition>

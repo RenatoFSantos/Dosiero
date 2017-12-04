@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+	<h:body>
+		<h:form>
+			<p:dataTable id="tbModulos" var="modu" value="#{commonsView.modulos}" rows="10" selection="#{clienteView.selecionados}" rowKey="#{modu.id}" >
+
+				<p:ajax event="rowSelectCheckbox" update="@form" />
+				<p:ajax event="rowUnselectCheckbox" update="@form" />
+				<p:ajax event="rowSelect" update="@form" />
+				<p:ajax event="rowUnselect" update="@form" />
+				<p:ajax event="toggleSelect" update="@form" />
+				<p:column selectionMode="multiple" style="width:16px;text-align:center"/>
+		        <p:column headerText="Id" width="10%" style="text-align: center;">	
+		            <h:outputText value="#{modu.id}" />
+		        </p:column>
+		        <p:column headerText="Nome de Modulo">
+		            <h:outputText value="#{modu.modu_nm_modulo}"/>
+		        </p:column>
+		    </p:dataTable>
+			<p:commandButton styleClass="padrao_btn" ajax="true" value="Fechar" onclick="PF('popUpClienteModulo').hide();"/>
+		</h:form>
+	</h:body>
+</ui:composition>

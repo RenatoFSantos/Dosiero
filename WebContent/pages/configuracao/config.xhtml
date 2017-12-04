@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="../template/_template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+
+	<ui:define name="conteudo">
+		<h:form id="formedit" prependId="false">
+			<p:messages id="message_erro" severity="error" autoUpdate="true" closable="true" />
+	   	    <p:growl id="message_info" severity="info, warn" autoUpdate="true"/>
+	   	    <div id="barratitulo">
+	   	    	Configuração Geral
+	   	    </div>
+	   	    <div id="formcadastro">
+	   	    	<p:panelGrid id="panelConfig" style="width: 70%; margin-left: 15%">
+				    <p:row>
+				        <p:column colspan="2" styleClass="ui-widget-header">
+				            <p:outputLabel value="Configuração"/>
+				        </p:column>
+				    </p:row>	   	    		
+				    <p:row>
+						<!-- IMPRESSORAS -->
+	   	    			<p:column>
+							<p:outputLabel styleClass="padrao_lbl14" value="Impressora Boleto: " for="impr"/>
+	   	    			</p:column>
+	   	    			<p:column>
+							<p:selectOneMenu id="impr" value="#{configuracaoView.parametro.impressora}" effect="fold" style="width: 300px;">
+								<f:selectItem itemLabel="Selecione impressora..." itemValue=""/>
+					            <f:selectItems value="#{configuracaoView.impressoras}" />
+					        </p:selectOneMenu>			
+	   	    			</p:column>
+	   	    		</p:row>
+	   	    	</p:panelGrid>
+				<p:commandButton styleClass="padrao_btn" value="Salvar" action="#{configuracaoView.salvar}" update="@form" style="margin-top:10px;"/>
+	   	    	<p:commandButton styleClass="padrao_btn" process="@this" update="@form" immediate="true" value="Cancelar" action="#{configuracaoView.retorna}"/>
+		   	</div>
+		</h:form>
+		<t:saveState value="#{configuracaoView.parametro}"/>
+		<t:saveState value="#{configuracaoView.impressoras}"/>
+	</ui:define>
+</ui:composition>

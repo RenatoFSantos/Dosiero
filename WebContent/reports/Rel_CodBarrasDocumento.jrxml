@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Rel_CodBarrasDocumento" language="groovy" columnCount="5" printOrder="Horizontal" pageWidth="595" pageHeight="842" columnWidth="108" columnSpacing="7" leftMargin="12" rightMargin="12" topMargin="30" bottomMargin="30" uuid="daecbf27-d4cb-455c-b9f8-6d9e2c5baeca">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="docu_cd_codbarras" class="java.lang.Long">
+		<fieldDescription><![CDATA[docu_cd_codbarras]]></fieldDescription>
+	</field>
+	<field name="docu_dt_inclusao" class="java.util.Date">
+		<fieldDescription><![CDATA[docu_dt_inclusao]]></fieldDescription>
+	</field>
+	<field name="docu_nm_arquivo" class="java.lang.String">
+		<fieldDescription><![CDATA[docu_nm_arquivo]]></fieldDescription>
+	</field>
+	<field name="docu_nm_documento" class="java.lang.String">
+		<fieldDescription><![CDATA[docu_nm_documento]]></fieldDescription>
+	</field>
+	<field name="docu_tx_conteudo" class="java.lang.String">
+		<fieldDescription><![CDATA[docu_tx_conteudo]]></fieldDescription>
+	</field>
+	<field name="docu_tx_observacao" class="java.lang.String">
+		<fieldDescription><![CDATA[docu_tx_observacao]]></fieldDescription>
+	</field>
+	<field name="id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[id]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="61" splitType="Stretch">
+			<componentElement>
+				<reportElement x="0" y="20" width="114" height="36" uuid="00dd8e65-1347-4724-baee-bfc52b360d57"/>
+				<jr:EAN13 xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" textPosition="bottom">
+					<jr:codeExpression><![CDATA[$F{docu_cd_codbarras}]]></jr:codeExpression>
+				</jr:EAN13>
+			</componentElement>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="10" y="6" width="91" height="10" uuid="1c155caa-13bc-49bf-a6b2-80d140d6a419"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{docu_nm_arquivo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

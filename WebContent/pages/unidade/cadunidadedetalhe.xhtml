@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="../template/_template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+
+	<ui:define name="conteudo">
+		<h:form id="formedit">
+			<p:messages id="message_erro" severity="error" autoUpdate="true" closable="true" />
+	   	    <p:growl id="message_info" severity="info, warn" autoUpdate="true"/>
+	   	    <div id="barratitulo">
+	   	    	Cadastro de Unidade
+	   	    </div>
+	   	    <div id="formcadastro">
+	   	    	<p:fieldset>
+						<p:outputLabel styleClass="padrao_lbl14 lbl_col1" value="ID:"/>
+						<p:outputLabel styleClass="padrao_txt" value="#{unidadeView.unidade.id}"/>
+						<br/>
+						<p:outputLabel styleClass="padrao_lbl14 lbl_col1" value="Sigla " for="unid_sg_sigla"/>
+						<p:inputText styleClass="padrao_txt larg100" id="unid_sg_sigla" maxlength="10" value="#{unidadeView.unidade.unid_sg_sigla}" required="true" requiredMessage="Sigla obrigatória!"/>
+						<br/>
+						<p:outputLabel styleClass="padrao_lbl14 lbl_col1" value="Nome da Unidade: " for="unid_nm_unidade"/>
+						<p:inputText styleClass="padrao_txt txt_nm_unidade" id="unid_nm_unidade" value="#{unidadeView.unidade.unid_nm_unidade}" required="true" requiredMessage="Nome obrigatório!"/>
+						<br/>
+				</p:fieldset>
+				<p:commandButton styleClass="padrao_btn" value="Salvar" action="#{unidadeView.salvar()}" update="formedit" style="margin-top: 10px;"/>
+	   	    	<p:commandButton styleClass="padrao_btn" process="@this" update="@form" immediate="true" value="Cancelar" action="#{unidadeView.listaUnidades()}"/>
+		   	</div>
+		</h:form>
+   	    <t:saveState value="#{unidadeView.unidade}"/>
+    	<t:saveState value="#{unidadeView.filtro}"/>
+		<t:saveState value="#{unidadeView.unidades}"/>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+	<h:body>
+		<h:form id="formOcorrencia" prependId="false">
+			<div id="ocorr_titulo">
+				<p:outputLabel  value="Acervo: #{emprestimoView.emprestimo.objAcervo.acer_nr_codbarras} - #{emprestimoView.emprestimo.objAcervo.acer_ds_assunto}"/>
+			</div>
+	   	    <div>
+	   	    	<p:outputLabel styleClass="padrao_lbl14" value="Filtrar por Ocorrência: " for="txt_pesquisa"/>
+	   	    	<p:inputText id="txt_pesquisa" styleClass="padrao_txt" value="#{emprestimoView.filtroOcorrencia.ocor_tx_ocorrencia}" size="75"/>&nbsp;
+				<p:commandButton styleClass="padrao_btn" value="Pesquisar" action="#{emprestimoView.pesquisarOcorrencia}" update="tbOcorrencias" />
+			</div>
+	   	    <div>
+			    <p:dataTable id="tbOcorrencias" var="ocorr" value="#{emprestimoView.ocorrencias}" rows="10" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom" selectionMode="single" selection="#{emprestimoView.ocorrenciaSel}" rowKey="#{ocorr.id}" emptyMessage="Nenhuma ocorrência cadastrada.">
+					<p:ajax event="rowSelect" listener="#{emprestimoView.onRowSelectOcorrencia}" update=":formOcorrencia:panelOcorrencia" />
+			        <p:column headerText="Id" width="8%" style="text-align: center;">	
+			            <h:outputText value="#{ocorr.id}" />
+			        </p:column>
+			        <p:column headerText="Ocorrência" sortBy="#{ocorr.ocor_tx_ocorrencia}">
+			            <h:outputText value="#{ocorr.ocor_tx_ocorrencia}"/>
+			        </p:column>
+			        <p:column headerText="Status" width="10%" sortBy="#{ocorr.ocor_in_ativacao}" style="text-align: center;">
+    	            <h:outputText value="#{ocorr.ocor_in_ativacao}"/>
+			        </p:column>
+			    </p:dataTable>	   	   
+	   	    </div>
+	   	    <div style="margin-top: 10px;">
+	   	    		<p:panelGrid id="panelOcorrencia" columns="2" layout="grid" columnClasses="ui-grid-col-2, ui-grid-col-10" style="padding: 0px;">
+						<!--  ID DA OCORRÊNCIA -->
+						<p:outputLabel styleClass="padrao_lbl14 lbl_col1" value="ID:"/>
+						<p:outputLabel styleClass="padrao_txt" value="#{emprestimoView.ocorrencia.id}"/>
+						<!--  DESCRIÇÃO DA OCORRÊNCIA -->
+						<p:outputLabel styleClass="padrao_lbl14 lbl_col1" value="Descrição: " for="ocor_tx_ocorrencia"/>
+						<p:inputTextarea id="ocor_tx_ocorrencia" styleClass="padrao_txt" rows="4" cols="80" counter="disp_ocor" maxlength="500" counterTemplate="{0} caracteres restantes." autoResize="false" value="#{emprestimoView.ocorrencia.ocor_tx_ocorrencia}" />
+						<p:outputLabel/>
+						<h:outputText styleClass="padrao_lbl11 contador" id="disp_ocor" style="margin-top:-10px;"/>
+						<!--  STATUS DA OCORRÊNCIA -->
+						<p:outputLabel/>
+						<h:panelGroup>
+							<p:selectBooleanCheckbox id="chk_ativo" styleClass="padrao_txt" immediate="true" value="#{emprestimoView.status}"/>
+							<p:outputLabel styleClass="padrao_lbl14" value="Ativa" for="chk_ativo"/>
+						</h:panelGroup>						
+				   </p:panelGrid>
+		   	</div>
+	   	    <div id="btn_crud">
+	   	    	<p:commandButton styleClass="padrao_btn" value="Salvar" action="#{emprestimoView.salvarOcorrencia}" oncomplete="PF('popUpOcorrencia').hide();"/>
+	   	    	&nbsp;
+	   	    	<p:commandButton styleClass="padrao_btn" value="Fechar" onclick="PF('popUpOcorrencia').hide();"/>
+	   	    </div>
+			<t:saveState value="#{emprestimoView.ocorrencias}"/>
+			<t:saveState value="#{emprestimoView.ocorrencia}"/>
+			<t:saveState value="#{emprestimoView.ocorrenciaSel}"/>
+			<t:saveState value="#{emprestimoView.filtroOcorrencia}"/>
+		</h:form>
+	</h:body>
+</ui:composition>

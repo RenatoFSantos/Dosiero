@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+	<p:panelGrid>
+	<h:panelGroup id="pngEditar">
+		<h:inputHidden value="#{classeView.editada.id}"/>
+	    <!-- COMBOBOX CLASSE PAI -->
+	    <div class="lbl_col larg150">
+			<p:outputLabel styleClass="padrao_lbl14 larg150"  value="Classe Principal: " for="clas_cd_pai"/>
+		</div>
+		<div class="txt_col larg680">
+			<!-- CLASSE PAI -->
+	        <div class="txt_col larg750">
+				<p:inputText styleClass="padrao_txt larg660" id="clas_cd_pai" value="#{classeView.editada.objClasse.clas_cd_classe} - #{classeView.editada.objClasse.clas_ds_nome}" required="true" readonly="true" requiredMessage="Classe obrigatória!"/>
+	        	<p:commandButton styleClass="padrao_btn" ajax="true" onclick="PF('popUpSubClasse').show();" title="Classe"  update="clas_cd_pai"  icon="ui-icon-search"></p:commandButton>
+	        </div>
+		</div>
+	    <!-- CODIGO CLASSE -->
+	    <div class="lbl_col larg150">
+			<p:outputLabel styleClass="padrao_lbl14 larg150" value="Cód. Classe: " for="clas_cd_classe"/>
+		</div>
+		<div class="txt_col larg680">
+			<p:inputText styleClass="padrao_txt larg100" id="clas_cd_classe" value="#{classeView.editada.clas_cd_classe}"/><br/>
+		</div>
+	    <!-- NOME DA SUBCLASSE -->
+	    <div class="lbl_col larg150">
+			<p:outputLabel styleClass="padrao_lbl14 larg150"  value="Subclasses: " for="clas_ds_nome"/>
+		</div>
+		<div class="txt_col larg680">
+ 			<p:inputTextarea id="clas_ds_nome" styleClass="padrao_txt" rows="2" cols="72" autoResize="false" value="#{classeView.editada.clas_ds_nome}" />
+		</div>
+		<!-- FASE CORRENTE -->
+	    <div class="lbl_col larg150">
+			<p:outputLabel styleClass="padrao_lbl14 larg150" value="Fase Corrente: " for="clas_tx_fasecorrente"/>
+		</div>
+		<div class="txt_col larg500">
+		    <p:selectOneMenu id="clas_tx_fasecorrente" value="#{classeView.editada.clas_tx_fasecorrente}" style="width:500px">
+			    <f:selectItems var="fc" value="#{commonsView.fs_correntes}" itemLabel="#{fc.nome}" />
+			    <p:ajax event="change" update="nranos" />
+			</p:selectOneMenu>
+		</div>
+		<!-- ANO -->
+	    <h:panelGroup id="nranos">
+		    <div class="lbl_col larg50">
+				<p:outputLabel id="lblAno" rendered="#{classeView.validaAno()}" styleClass="padrao_lbl14 larg50" value="Anos: " for="clas_nr_fasecorrente"/>
+			</div>
+			<div class="txt_col larg150">
+				<p:inputText id="clas_nr_fasecorrente" rendered="#{classeView.validaAno()}" readonly="#{classeView.editada.clas_tx_fasecorrente != 'ANO'}" styleClass="padrao_txt larg36" value="#{classeView.editada.clas_nr_fasecorrente}"/>
+				<br/>
+			</div>
+	    </h:panelGroup>		
+		<!-- FASE INTERMEDIARIA -->
+		<div class="txt_col larg900">
+		    <div class="lbl_col larg150">
+				<p:outputLabel styleClass="padrao_lbl14 larg150" value="Fase Intermediária: " for="clas_tx_faseintermediaria"/>
+			</div>
+			<div class="txt_col larg50">
+				<p:inputText styleClass="padrao_txt larg50" id="clas_tx_faseintermediaria" value="#{classeView.editada.clas_tx_faseintermediaria}"/><br/>
+			</div>
+			<div class="txt_col larg650" style="min-height: 2em; padding-top:4px;">
+				<p:outputLabel styleClass="padrao_lbl14 larg50" value="anos"/>
+			</div>
+		</div>
+		<!-- DESTINACAO FINAL -->
+	    <div class="lbl_col larg150">
+			<p:outputLabel styleClass="padrao_lbl14 larg150" value="Destinação Final: " for="clas_tx_destinacaofinal"/>
+		</div>
+		<div class="txt_col larg680">
+		    <p:selectOneMenu id="clas_tx_destinacaofinal" value="#{classeView.editada.clas_tx_destinacaofinal}" style="width:600px">
+			    <f:selectItems var="df" value="#{commonsView.fs_destfinal}" itemLabel="#{df.nome}" />
+			</p:selectOneMenu>
+		</div>
+	    <!-- OBSERVAÇÃO -->
+	    <div class="lbl_col larg150">
+			<p:outputLabel styleClass="padrao_lbl14 larg150"  value="Observações: " for="clas_tx_observacao"/>
+		</div>
+		<div class="txt_col larg680">
+ 			<p:inputTextarea id="clas_tx_observacao" styleClass="padrao_txt" rows="5" cols="72" counter="disp_obs" maxlength="1200" counterTemplate="{0} caracteres restantes." autoResize="false" value="#{classeView.editada.clas_tx_observacao}" />
+ 			<h:outputText styleClass="padrao_lbl11 contador" id="disp_obs" />
+		</div>
+		<div class="txt_col larg680">
+			<p:commandButton styleClass="padrao_btn" value="Salvar" actionListener="#{classeView.salvar()}" oncomplete="PF('popUpClasse').hide()" update=":treeclass pngEditar"/>
+			<p:commandButton styleClass="padrao_btn" value="Excluir" actionListener="#{classeView.excluir()}" oncomplete="PF('popUpClasse').hide()" update=":treeclass">
+			    <p:confirm  header="Confirmação"  message="Deseja excluir este registro?"  icon="ui-icon-alert"/>
+			</p:commandButton>
+			<p:confirmDialog global="true" >
+		       <p:commandButton value="Sim"  type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+		       <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+		    </p:confirmDialog> 
+		</div>
+	</h:panelGroup>
+	</p:panelGrid>
+	<p:dialog header="Classe" resizable="false" draggable="false" width="960" position="center" height="500" widgetVar="popUpSubClasse" modal="true" dynamic="true" minHeight="40">
+   		<ui:include src="popUpSubClasse.xhtml"></ui:include>
+	</p:dialog>
+</ui:composition>

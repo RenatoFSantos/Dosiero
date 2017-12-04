@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="../template/_template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+
+	<ui:define name="conteudo">
+		<h:form id="formedit">
+			<p:messages id="message_erro" severity="error" autoUpdate="true" closable="true" />
+	   	    <p:growl id="message_info" severity="info, warn" autoUpdate="true"/>
+	   	    <div id="barratitulo">
+	   	    	Cadastro de Perfil
+	   	    </div>
+	   	    <div id="formcadastro">
+	   	    	<p:fieldset>
+					<p:outputLabel styleClass="padrao_lbl14 lbl_col1" value="ID:"/>
+					<p:outputLabel styleClass="padrao_txt" value="#{perfilView.perfil.id}"/>
+					<br/>
+					<p:outputLabel styleClass="padrao_lbl14 lbl_col1" value="Código: " for="perf_cd_perfil"/>
+					<p:inputText styleClass="padrao_txt larg50" id="perf_cd_perfil" maxlength="3" value="#{perfilView.perfil.perf_cd_perfil}" required="true" requiredMessage="Código obrigatório!"/>
+					<br/>
+					<p:outputLabel styleClass="padrao_lbl14 lbl_col1" value="Nome do Perfil: " for="perf_nm_perfil"/>
+					<p:inputText styleClass="padrao_txt larg600" id="perf_nm_perfil" value="#{perfilView.perfil.perf_nm_perfil}" required="true" requiredMessage="Nome obrigatório!" maxlength="20"/>
+					<br/>
+			   	    <div>
+					    <p:dataTable styleClass="tabela" id="tbPerfilPaginas" var="pagiperf" value="#{perfilView.perfilPaginas}" paginator="false" scrollable="true" scrollHeight="150">
+					        <p:column width="15" style="text-align: center;">
+		    					<p:commandButton id="btn_excluirpagina" title="excluir" action="#{perfilView.excluirPaginaDetalhe()}" icon="ui-icon-closethick" update="tbPerfilPaginas, formedit:formPaginas:tbPaginas">
+						        	<f:setPropertyActionListener value="#{pagiperf}" target="#{perfilView.paginaSel}"/>
+								    <p:confirm  header="Confirmação"  message="Deseja excluir este registro?"  icon="ui-icon-alert"/>
+		    					</p:commandButton>
+		    					<p:confirmDialog global="true" >
+								       <p:commandButton value="Sim"  type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+								       <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+							    </p:confirmDialog> 
+		 			        </p:column>			        
+					        <p:column headerText="Página" width="300" >
+					            <h:outputText value="#{pagiperf.objPagina.pagi_nm_pagina}"/>
+					        </p:column>
+					        <p:column headerText="Total" width="50" style="text-align: center;">
+								<p:selectBooleanCheckbox id="ace_total" styleClass="padrao_txt" disabled="true" value="#{pagiperf.pepa_in_acesso_total}"/>
+					        </p:column>
+					        <p:column headerText="Leitura" width="50" style="text-align: center;">
+								<p:selectBooleanCheckbox id="ace_leitura" styleClass="padrao_txt" disabled="true" value="#{pagiperf.pepa_in_acesso_leitura}"/>
+					        </p:column>
+					        <p:column headerText="Escrita" width="50" style="text-align: center;">
+								<p:selectBooleanCheckbox id="ace_escrita" styleClass="padrao_txt" disabled="true" value="#{pagiperf.pepa_in_acesso_escrita}"/>
+					        </p:column>
+					        <p:column headerText="Exclusão" width="50" style="text-align: center;">
+								<p:selectBooleanCheckbox id="ace_exclusao" styleClass="padrao_txt" disabled="true" value="#{pagiperf.pepa_in_acesso_exclusao}"/>
+					        </p:column>
+					    </p:dataTable>	   	   
+			   	    </div>
+				</p:fieldset>
+				<p:commandButton styleClass="padrao_btn" value="Salvar" action="#{perfilView.salvar()}" update="formedit"/>
+	   	    	<p:commandButton styleClass="padrao_btn" process="@this" update="@form" value="Cancelar" action="#{perfilView.listaPerfils()}"/>
+				<p:commandButton styleClass="padrao_btn" ajax="true" rendered="#{!empty perfilView.perfil.perf_cd_perfil}" onclick="PF('popUpPerfilPagina').show();" title="Página" value="Página" icon="ui-icon-circle-plus"/>
+		   	</div>
+		   	<p:dialog header="Página" resizable="false" draggable="false" width="700" position="center" closable="false" height="500" widgetVar="popUpPerfilPagina" modal="true" minHeight="40">
+    			<ui:include src="popUpPerfilPagina.xhtml"></ui:include>
+			</p:dialog>
+		</h:form>
+   	    <t:saveState value="#{perfilView.paginaSel}"/>
+   	    <t:saveState value="#{perfilView.perfilPaginas}"/>
+   	    <t:saveState value="#{perfilView.perfil}"/>
+   	    <t:saveState value="#{perfilView.paginas}"/>
+	</ui:define>
+</ui:composition>

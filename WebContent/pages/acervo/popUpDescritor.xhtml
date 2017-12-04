@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+	<h:body>
+		<h:form>
+			<p:dataTable id="tbDescritor" var="desc" value="#{commonsView.descritors}" rows="10" selection="#{acervoView.seldescritors}" rowKey="#{desc.id}" >
+
+				<p:column selectionMode="multiple" style="width:16px;text-align:center"/>
+		        <p:column headerText="Id" width="10%" style="text-align: center;">	
+		            <h:outputText value="#{desc.id}" />
+		        </p:column>
+		        <p:column headerText="Descritor">
+		            <h:outputText value="#{desc.desc_nm_descritor}"/>
+		        </p:column>
+		    </p:dataTable>
+			<p:commandButton styleClass="padrao_btn" ajax="true" value="Fechar" onclick="PF('popUpDescritor').hide();"/>
+		    <t:saveState value="#{acervoView.seldescritors}"/>
+		</h:form>
+	</h:body>
+</ui:composition>

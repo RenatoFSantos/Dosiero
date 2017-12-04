@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+	<h:body>
+			<h:form id="formedicao">
+				<h:inputHidden value="#{classeView.editada.id}"/>
+
+			    <div class="lbl_col larg100">
+					<p:outputLabel styleClass="padrao_lbl14 larg100"  value="Classe Pai: " for="clas_cd_pai"/>
+				</div>
+				<div class="txt_col larg500">
+				<p:selectOneMenu styleClass="padrao_txt larg500" style="width: 500px !important;" id="clas_cd_pai"  converter="#{classeConverter}" value="#{classeView.editada.objClasse}">
+					<f:selectItems var="pai" value="#{classeView.classesSelect}"  itemValue="#{pai}" itemLabel="#{pai.clas_ds_nome}"/>
+				</p:selectOneMenu><br/>
+				</div>
+
+			    <div class="lbl_col larg100">
+					<p:outputLabel styleClass="padrao_lbl14 larg100" value="Cód. Classe: " for="clas_cd_classe"/>
+				</div>
+				<div class="txt_col larg500">
+					<p:inputText styleClass="padrao_txt larg100" id="clas_cd_classe" value="#{classeView.editada.clas_cd_classe}"/><br/>
+				</div>
+
+			    <div class="lbl_col larg100">
+					<p:outputLabel styleClass="padrao_lbl14 larg100"  value="Descrição: " for="clas_ds_nome"/>
+				</div>
+
+				<div class="txt_col larg500">
+   					<p:inputTextarea id="clas_ds_nome" styleClass="padrao_txt" rows="2" cols="50" autoResize="false" value="#{classeView.editada.clas_ds_nome}" />
+   				</div>
+   				<!-- 
+				<p:commandButton styleClass="padrao_btn" value="Salvar" actionListener="#{classeView.salvar()}" oncomplete="PF('formedicao:popUpClasse').hidden();" update="formedicao, :fomarvore"/>
+				<p:commandButton styleClass="padrao_btn" value="Excluir" actionListener="#{classeView.excluir()}" update="formedicao, :fomarvore"/>
+				<p:commandButton styleClass="padrao_btn" value="Nova Subcategoria" actionListener="#{classeView.inserir()}" update="formedicao, :fomarvore"/>
+				 -->
+			</h:form>
+	</h:body>
+</ui:composition>

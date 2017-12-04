@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="../template/_template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+
+	<ui:define name="conteudo">
+		<h:form id="formedit">
+			<p:messages id="message_erro" severity="error" autoUpdate="true" closable="true" />
+	   	    <p:growl id="message_info" severity="info, warn" autoUpdate="true"/>
+	   	    <div id="barratitulo">
+	   	    	Cadastro de Categoria
+	   	    </div>
+	   	    <div id="formcadastro">
+	   	    	<p:fieldset>
+						<p:outputLabel styleClass="padrao_lbl14 lbl_col1" value="ID:"/>
+						<p:outputLabel styleClass="padrao_txt" value="#{categoriaView.categoria.id}"/>
+						<br/>
+						<p:outputLabel styleClass="padrao_lbl14 lbl_col1" value="Nome da Categoria: " for="cate_nm_categoria"/>
+						<p:inputText styleClass="padrao_txt txt_nm_categoria" id="cate_nm_categoria" maxlength="50" style="width: 300px;" value="#{categoriaView.categoria.cate_nm_categoria}" required="true" requiredMessage="Nome obrigatório!"/>
+						<br/>
+				</p:fieldset>
+				<p:commandButton styleClass="padrao_btn" value="Salvar" action="#{categoriaView.salvar()}" update="formedit"/>
+	   	    	<p:commandButton styleClass="padrao_btn" process="@this" update="@form" immediate="true" value="Cancelar" action="#{categoriaView.listaCategorias()}"/>
+		   	</div>
+		</h:form>
+   	    <t:saveState value="#{categoriaView.categoria}"/>
+    	<t:saveState value="#{categoriaView.filtro}"/>
+		<t:saveState value="#{categoriaView.categorias}"/>
+	</ui:define>
+</ui:composition>

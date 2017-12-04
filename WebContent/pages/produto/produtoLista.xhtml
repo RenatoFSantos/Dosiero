@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<ui:composition template="/pages/template/templateLista.xhtml">
+
+	<ui:define name="menuLista">
+		<ui:include src="/pages/menuCrud/menuLista.xhtml" />
+	</ui:define>
+	<ui:define name="filtro">
+
+		<table>
+			<tr>
+				<td><p:outputLabel value="Código" /></td>
+			</tr>
+			<tr>
+				<td><p:inputText /></td>
+			</tr>
+			<tr>
+				<td><p:outputLabel value="Nome" /></td>
+			</tr>
+			<tr>
+				<td><p:inputText /></td>
+			</tr>
+		</table>
+	</ui:define>
+
+	<ui:define name="tabela">
+		<p:dataTable var="produto" rows="10" paginator="true"
+			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="5,10,15" emptyMessage="Nenhum registro encontrado">
+			<p:column headerText="Código">
+				<h:outputText value="" />
+			</p:column>
+
+			<p:column headerText="Nome">
+				<h:outputText value="" />
+			</p:column>
+
+			<p:column headerText="Tm">
+				<h:outputText value="" />
+			</p:column>
+
+		</p:dataTable>
+	</ui:define>
+
+</ui:composition>
+</html>

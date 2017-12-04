@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Controle Web</title>
+</h:head>
+<h:body>
+	<h:outputStylesheet library="css" name="inputClass.css" />
+	<h:outputStylesheet library="css" name="aplicacaoClass.css" />
+	<h:form id="form">
+		<div align="center">
+			<table width="950px" border="1">
+				<tr>
+					<td colspan="2" align="center" height="30px">
+						<h1>CONTROLE DE COMPRA E VENDA</h1>
+					</td>
+				</tr>
+				<tr>
+					<td width="100px" valign="top" rowspan="2">
+						<ui:insert name="menu">
+							<h:panelGrid columns="1">
+								<p:menu model="#{menuManagerBean.model}" />
+							</h:panelGrid>
+						</ui:insert>
+					</td>
+					<td width="850px;" valign="top">
+						<ui:insert name="conteudo">
+						</ui:insert>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</h:form>
+</h:body>
+</html>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="../template/_template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+
+	<ui:define name="conteudo">
+		<h:form id="formedit">
+			<p:messages id="message_erro" severity="error" autoUpdate="true" closable="true" />
+	   	    <p:growl id="message_info" severity="info, warn" autoUpdate="true"/>
+	   	    <div id="barratitulo">
+	   	    	Cadastro de Página
+	   	    </div>
+	   	    <div id="formcadastro">
+	   	    	<p:fieldset styleClass="ui-widget-content">
+						<p:outputLabel styleClass="padrao_lbl14 lbl_col1" value="ID:"/>
+						<p:outputLabel styleClass="padrao_txt" value="#{paginaView.pagina.id}"/>
+						<br/>
+						<p:outputLabel styleClass="padrao_lbl14 lbl_col1" value="Nome do Página: " for="pagi_nm_pagina"/>
+						<p:inputText styleClass="padrao_txt larg500" id="pagi_nm_pagina" value="#{paginaView.pagina.pagi_nm_pagina}" required="true" requiredMessage="Nome obrigatório!"/>
+						<br/>
+						<p:outputLabel styleClass="padrao_lbl14 lbl_col1" value="Modulo: " for="modu_ds_modulo"/>
+						<p:inputText styleClass="padrao_txt larg200" id="modu_ds_modulo" value="#{paginaView.pagina.objModulo.modu_nm_modulo}" readonly="true" required="true" requiredMessage="Modulo obrigatório!"/>
+						<p:commandButton styleClass="padrao_btn" ajax="true" onclick="PF('popUpModulo').show();" title="Modulo"  update="modu_ds_modulo"  icon="ui-icon-search"></p:commandButton>
+						<br/>
+				</p:fieldset>
+				<br />
+				<p:commandButton styleClass="padrao_btn" value="Salvar" action="#{paginaView.salvar()}" update="formedit"/>
+	   	    	<p:commandButton styleClass="padrao_btn" process="@this" update="@form" immediate="true" value="Cancelar" action="#{paginaView.listaPaginas()}"/>
+		   	</div>
+		</h:form>
+		<p:dialog header="Modulo" resizable="false" draggable="false" width="600" position="center" height="500" widgetVar="popUpModulo" modal="true" minHeight="40">
+    		<ui:include src="popUpModulo.xhtml"></ui:include>
+		</p:dialog>
+   	    <t:saveState value="#{paginaView.pagina}"/>
+    	<t:saveState value="#{paginaView.filtro}"/>
+		<t:saveState value="#{paginaView.paginas}"/>
+	</ui:define>
+</ui:composition>

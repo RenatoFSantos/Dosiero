@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Sub_Documentos" language="groovy" pageWidth="542" pageHeight="842" columnWidth="502" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="91f41a37-37b8-4a1e-964f-e11da0938f8e">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="docu_dt_inclusao" class="java.util.Date">
+		<fieldDescription><![CDATA[docu_dt_inclusao]]></fieldDescription>
+	</field>
+	<field name="docu_nm_arquivo" class="java.lang.String">
+		<fieldDescription><![CDATA[docu_nm_arquivo]]></fieldDescription>
+	</field>
+	<field name="docu_nm_documento" class="java.lang.String">
+		<fieldDescription><![CDATA[docu_nm_documento]]></fieldDescription>
+	</field>
+	<field name="docu_nr_codbarras" class="java.lang.String">
+		<fieldDescription><![CDATA[docu_nr_codbarras]]></fieldDescription>
+	</field>
+	<field name="docu_tx_conteudo" class="java.lang.String">
+		<fieldDescription><![CDATA[docu_tx_conteudo]]></fieldDescription>
+	</field>
+	<field name="docu_tx_observacao" class="java.lang.String">
+		<fieldDescription><![CDATA[docu_tx_observacao]]></fieldDescription>
+	</field>
+	<field name="id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[id]]></fieldDescription>
+	</field>
+	<field name="objAcervo" class="_model.vo.Acervo">
+		<fieldDescription><![CDATA[objAcervo]]></fieldDescription>
+	</field>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="3" width="265" height="15" backcolor="#CCCCCC" uuid="e3cc609b-cbdd-4552-842d-586a2d6e27d6"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Documentos]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="19" width="500" height="1" uuid="48556f07-97fe-4b4f-aec8-f028d7967fa2"/>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="267" y="3" width="233" height="15" backcolor="#CCCCCC" uuid="63eb40a6-9bc1-4294-9409-5236eaadfb81"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Arquivo Digital]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="17" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="265" height="15" uuid="ca087c97-ad23-437e-92d4-d8d008549e12"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{docu_nm_documento}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="267" y="0" width="233" height="15" uuid="30a92ddc-b53e-4230-b01d-037eb5934005"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{docu_nm_arquivo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

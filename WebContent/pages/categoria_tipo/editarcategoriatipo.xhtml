@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="../template/_template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+
+	<ui:define name="conteudo">
+		<h:form id="formedit" prependId="false">
+			<p:messages id="message_erro" severity="error" autoUpdate="true" closable="true" />
+	   	    <p:growl id="message_info" severity="info, warn" autoUpdate="true"/>
+	   	    <div id="barratitulo">
+	   	    	Parâmetros de Empréstimo
+	   	    </div>
+	   	    <div id="formcadastro">
+	   	    	<p:panelGrid id="panelSelecao" style="width: 70%; margin-left: 15%">
+				    <p:row>
+				        <p:column colspan="2" styleClass="ui-widget-header">
+				            <p:outputLabel value="Seleção"/>
+				        </p:column>
+				    </p:row>	   	    		
+				    <p:row>
+						<!-- CATEGORIA -->
+	   	    			<p:column>
+							<p:outputLabel styleClass="padrao_lbl14" value="Categoria: " for="listaCategoria"/>
+	   	    			</p:column>
+	   	    			<p:column>
+							<p:inputText styleClass="padrao_txt numero" id="listaCategoria" readonly="true" value="#{categoriaTipoView.categoriaTipo.objCategoria.cate_nm_categoria}" style="width: 400px;"/>
+	   	    			</p:column>
+	   	    		</p:row>
+	   	    		<p:row>
+						<!-- TIPO -->
+	   	    			<p:column>
+							<p:outputLabel styleClass="padrao_lbl14" value="Tipo: " for="listaTipo"/>
+	   	    			</p:column>
+	   	    			<p:column>
+							<p:inputText styleClass="padrao_txt numero" id="listaTipo" readonly="true" value="#{categoriaTipoView.categoriaTipo.objTipo.tipo_ds_tipo}" style="width: 400px;"/>
+	   	    			</p:column>
+	   	    		</p:row>
+				    <p:row>
+				        <p:column colspan="2" styleClass="ui-widget-header">
+				            <p:outputLabel value="Prazos para empréstimo"/>
+				        </p:column>
+	   	    		</p:row>
+				    <p:row>
+						<!-- PRAZO DE EMPRÉSTIMO -->
+						<p:column>
+							<p:outputLabel styleClass="padrao_lbl14 " value="Devolução do Empréstimo: " for="cati_nr_prazo_dev_emprestimo"/>
+						</p:column>
+						<p:column>
+							<p:inputText styleClass="padrao_txt numero" id="cati_nr_prazo_dev_emprestimo" value="#{categoriaTipoView.categoriaTipo.cati_nr_prazo_dev_emprestimo}" style="width: 50px;">
+								<f:convertNumber pattern="#0"/>
+							</p:inputText>
+						</p:column>
+	   	    		</p:row>
+				    <p:row>
+						<!-- PRAZO DE CONSULTA -->
+						<p:column>
+							<p:outputLabel styleClass="padrao_lbl14" value="Devolução da consulta: " for="cati_nr_prazo_dev_consulta"/>
+						</p:column>
+						<p:column>
+							<p:inputText styleClass="padrao_txt numero" id="cati_nr_prazo_dev_consulta" value="#{categoriaTipoView.categoriaTipo.cati_nr_prazo_dev_consulta}" style="width: 50px;">
+								<f:convertNumber pattern="#0"/>
+							</p:inputText>
+						</p:column>
+				    </p:row>	   	    		
+				    <p:row>
+				        <p:column colspan="2" styleClass="ui-widget-header">
+				            <p:outputLabel value="Sanções por Atraso"/>
+				        </p:column>
+	   	    		</p:row>
+				    <p:row>
+						<!-- SANCAO EMPRÉSTIMO -->
+						<p:column>
+							<p:outputLabel styleClass="padrao_lbl14" value="Empréstimo: " for="cati_nr_sancao_emprestimo"/>
+						</p:column>
+						<p:column>
+							<p:inputText styleClass="padrao_txt numero" id="cati_nr_sancao_emprestimo" value="#{categoriaTipoView.categoriaTipo.cati_nr_sancao_emprestimo}" style="width: 50px;">
+								<f:convertNumber pattern="#0"/>
+							</p:inputText>
+						</p:column>
+	   	    		</p:row>
+				    <p:row>
+						<!-- SANCAO CONSULTA -->
+						<p:column>
+							<p:outputLabel styleClass="padrao_lbl14" value="Consulta: " for="cati_nr_sancao_consulta"/>
+						</p:column>
+						<p:column>
+							<p:inputText styleClass="padrao_txt numero" id="cati_nr_sancao_consulta" value="#{categoriaTipoView.categoriaTipo.cati_nr_sancao_consulta}" style="width: 50px;">
+								<f:convertNumber pattern="#0"/>
+							</p:inputText>
+						</p:column>
+				    </p:row>	   	    		
+				    <p:row>
+				        <p:column colspan="2" styleClass="ui-widget-header">
+				            <p:outputLabel value="Quantidades Máximas"/>
+				        </p:column>
+	   	    		</p:row>
+				    <p:row>
+						<!-- EMPRÉSTIMOS SIMULTÂNEOS -->
+						<p:column>
+							<p:outputLabel styleClass="padrao_lbl14" value="Empréstimo simultâneos: " for="cati_nr_qtdmax_emprestimo"/>
+						</p:column>
+						<p:column>
+							<p:inputText styleClass="padrao_txt numero" id="cati_nr_qtdmax_emprestimo" value="#{categoriaTipoView.categoriaTipo.cati_nr_qtdmax_emprestimo}" style="width: 50px;">
+								<f:convertNumber pattern="#0"/>
+							</p:inputText>
+						</p:column>
+	   	    		</p:row>
+				    <p:row>
+						<!-- CONSULTAS SIMULTÂNEAS -->
+						<p:column>
+							<p:outputLabel styleClass="padrao_lbl14" value="Consultas simultâneas: " for="cati_nr_qtdmax_consulta"/>
+						</p:column>
+						<p:column>
+							<p:inputText styleClass="padrao_txt numero" id="cati_nr_qtdmax_consulta" value="#{categoriaTipoView.categoriaTipo.cati_nr_qtdmax_consulta}" style="width: 50px;">
+								<f:convertNumber pattern="#0"/>
+							</p:inputText>
+						</p:column>
+				    </p:row>	   	    		
+				    <p:row>
+						<!-- RENOVAÇÕES -->
+						<p:column>
+							<p:outputLabel styleClass="padrao_lbl14" value="Renovações: " for="cati_nr_qtdmax_renovacao"/>
+						</p:column>
+						<p:column>
+							<p:inputText styleClass="padrao_txt numero" id="cati_nr_qtdmax_renovacao" value="#{categoriaTipoView.categoriaTipo.cati_nr_qtdmax_renovacao}" style="width: 50px;">
+								<f:convertNumber pattern="#0"/>
+							</p:inputText>
+						</p:column>
+				    </p:row>	   	    		
+	   	    	</p:panelGrid>
+				<p:commandButton styleClass="padrao_btn" value="Salvar" action="#{categoriaTipoView.salvar()}" update="@all" style="margin-top: 10px;"/>
+	   	    	<p:commandButton styleClass="padrao_btn" process="@this" update="@form" immediate="true" value="Cancelar" action="#{categoriaTipoView.listaCategoriaTipos()}"/>
+		   	</div>
+		</h:form>
+   	    <t:saveState value="#{categoriaView.categorias}"/>
+		<t:saveState value="#{tipoView.tipos}"/>
+		<t:saveState value="#{categoriaTipoView.categoriaTipo}"/>
+		<t:saveState value="#{categoriaTipoView.modo}"/>
+	</ui:define>
+</ui:composition>

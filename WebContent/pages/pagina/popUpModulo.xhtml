@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+	<h:body>
+		<h:form>
+		 	<div>
+	   	    	<p:outputLabel styleClass="padrao_lbl14" value="Filtrar por Nome: " for="txt_pesquisa"/>
+	   	    	<p:inputText id="txt_pesquisa" styleClass="padrao_txt" value="#{paginaView.filtroModulo.modu_nm_modulo}" size="30"/>&nbsp;
+				<p:commandButton styleClass="padrao_btn" value="Pesquisar" action="#{paginaView.pesquisarModulos()}" update="@form" />	 	
+		 	</div>
+			<p:dataTable id="tbModulos"  var="modu" value="#{paginaView.modulos}" rows="10" paginator="true">
+		        <p:column width="80">
+					<p:commandButton oncomplete="PF('formedit:popUpModulo').hidden();" action="#{paginaView.selecionarModulo()}" id="btn_selecionar" update=":modu_ds_modulo" title="selecionar" ajax="false" icon="ui-icon-arrowreturn-1-w">
+						<f:setPropertyActionListener value="#{modu}" target="#{paginaView.moduloSel}"/>
+					</p:commandButton>
+		        </p:column>			        
+		        <p:column headerText="Id" width="40" style="text-align: center;">	
+		            <h:outputText value="#{modu.id}" />
+		        </p:column>
+		        <p:column headerText="Nome de Modulo">
+		            <h:outputText value="#{modu.modu_nm_modulo}"/>
+		        </p:column>
+		    </p:dataTable>
+		    <t:saveState value="#{paginaView.filtroModulo}"/>
+		    <t:saveState value="#{paginaView.modulos}"/>		    	
+		</h:form>
+	</h:body>
+</ui:composition>

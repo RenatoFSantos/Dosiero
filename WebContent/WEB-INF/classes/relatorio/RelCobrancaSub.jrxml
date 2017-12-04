@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelCobrancaSub" pageWidth="410" pageHeight="802" columnWidth="410" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="a7c2684f-2dc2-43ca-b07b-5d20d7d392fc">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="dtCobranca" class="java.util.Date"/>
+	<field name="pessoaContato" class="java.lang.String"/>
+	<field name="observacao" class="java.lang.String"/>
+	<detail>
+		<band height="10" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="2" y="1" width="32" height="9" uuid="c4211cea-6fd4-4e12-8e41-1de9ca29572b"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dtCobranca}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="35" y="1" width="73" height="9" uuid="b2c3e4c4-1bdc-4499-9d0b-5c6dc1993dc9"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pessoaContato}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="111" y="1" width="284" height="9" uuid="9eedf209-ebd7-4e18-b955-c3175e062681"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{observacao}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

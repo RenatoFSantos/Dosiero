@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+	<h:body>
+		<h:form id="formUp" prependId="false" enctype="multipart/form-data">
+			<div id="up" class="ui-fluid">
+				<h:panelGroup id="itemUp" layout="block" styleClass="ui-fluid">
+					<p:panelGrid id="gridUp" columns="2" layout="grid" columnClasses="ui-grid-col-2, ui-grid-col-10" style="padding-bottom: 10px;">
+						<!-- NOME DO ARQUIVO - UPLOAD -->
+						<p:outputLabel styleClass="padrao_lbl14" value="Upload: " for="docu_nm_arquivo_up"/>
+						<p:fileUpload fileUploadListener="#{acervoView.upload}" mode="advanced" dragDropSupport="false"
+           					update="formUp, :formedit" sizeLimit="5000000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png|pdf)$/" invalidFileMessage="Tipo errado! Apenas arquivos nos formatos GIF, JPG, PNG e PDF são permitidos." invalidSizeMessage="Arquivo excedeu o tamanho máximo de 5Mb."/>
+						<p:outputLabel styleClass="padrao_lbl14" value="Arquivo: " for="docu_nm_arquivo_up"/>
+						<p:inputText styleClass="padrao_txt" style="width: 595px;" id="docu_nm_arquivo_up" readonly="true" value="#{acervoView.documento.docu_nm_arquivo}"/>
+					</p:panelGrid>
+					<p:commandButton styleClass="padrao_btn" value="Salvar" action="#{acervoView.adicionarDocumento()}" update="formUp, :formedit" onsuccess="PF('popUpUpload').hide();"/>
+		   	    	<p:commandButton styleClass="padrao_btn" process="@this" update=":formedit:tbArquivos" immediate="true" value="Fechar" onclick="PF('popUpUpload').hide();"/>
+				</h:panelGroup>
+			</div>
+			<t:saveState value="#{acervoView.documento}"/>
+		</h:form>
+	</h:body>
+</ui:composition>

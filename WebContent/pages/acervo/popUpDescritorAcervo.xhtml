@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+	<h:body>
+		<h:form id="formDescritor">
+	    	<p:toolbar style="margin-top: 5px">
+	    		<p:toolbarGroup>
+   					<p:commandButton id="btn_excluir" title="excluir" action="#{acervoView.excluirDescritor()}" icon="ui-icon-closethick" update="listaDescritor, tbDescritor">
+			        	<f:setPropertyActionListener value="#{acervoView.descritorSel}" target="#{acervoView.descritorSel}"/>
+					    <p:confirm  header="Confirmação"  message="Deseja excluir este registro?"  icon="ui-icon-alert"/>
+   					</p:commandButton>
+	    		</p:toolbarGroup>
+	    	</p:toolbar>
+
+	        <p:selectOneListbox id="listaDescritor" scrollHeight="100" value="#{acervoView.descritorSel}" converter="generic" var="t" filter="true" filterMatchMode="contains" style="width: 99%; height: 150px;">
+	            <f:selectItems value="#{acervoView.seldescritors}" var="seldesc" itemLabel="#{seldesc.desc_nm_descritor}" itemValue="#{seldesc}" />
+	            <p:column>
+	                <h:outputText value="#{t.desc_nm_descritor}" />
+	            </p:column>
+	        </p:selectOneListbox>
+	        
+	        <p:panelGrid columns="3" style="margin-top: 10px; width: 100%;" columnClasses="rotulo, valor, valor">
+	        	<p:column>
+   	    			<p:outputLabel styleClass="padrao_lbl14" value="Pesquisar: " for="txt_pesquisa" style="color: #fff;"/>
+	        		<h:panelGroup id="panelPesquisa">
+	   	    			<p:inputText id="txt_pesquisa" styleClass="padrao_txt" value="#{acervoView.filtroDescritor.desc_nm_descritor}" size="40"/>&nbsp;
+		        		<p:commandButton id="btnPesquisa" title="Pesquisar" action="#{acervoView.pesquisarDescritor()}" icon="ui-icon-search" update="tbDescritor, panelPesquisa"/>
+		        		<p:commandButton id="btnIncluir" value="Incluir" icon="ui-icon-disk" action="#{acervoView.incluirDescritor()}" disabled="#{acervoView.possoIncluir}"  update="btnIncluir, tbDescritor"/>
+	        		</h:panelGroup>
+	        	</p:column>
+	        </p:panelGrid>
+	        
+			<p:dataTable id="tbDescritor" var="desc" value="#{acervoView.descritors}" rows="7" paginator="true" paginatorPosition="bottom" paginatorAlwaysVisible="false" style="margin-top: 3px;" emptyMessage="Não existem descritores cadastrados.">
+		        <p:column width="40">
+					<p:commandButton action="#{acervoView.selecionarDescritor()}" id="btn_selecionar" title="selecionar" update="formDescritor" icon="ui-icon-arrowreturn-1-w">
+						<f:setPropertyActionListener value="#{desc}" target="#{acervoView.descritorSel}"/>
+					</p:commandButton>
+		        </p:column>			        
+		        <p:column headerText="Id" width="15%" style="text-align: center;">	
+		            <h:outputText value="#{desc.id}" />
+		        </p:column>
+		        <p:column headerText="Descritor" sortBy="#{desc.desc_nm_descritor}">
+		            <h:outputText value="#{desc.desc_nm_descritor}"/>
+		        </p:column>
+		    </p:dataTable>
+			<p:commandButton styleClass="padrao_btn" ajax="true" value="Fechar" onclick="PF('popUpDescritorAcervo').hide();" style="margin-top: 10px;"/>
+		    <t:saveState value="#{acervoView.seldescritors}"/>
+		    <t:saveState value="#{acervoView.descritors}"/>
+		    <t:saveState value="#{acervoView.possoIncluir}"/>
+		</h:form>
+	</h:body>
+</ui:composition>

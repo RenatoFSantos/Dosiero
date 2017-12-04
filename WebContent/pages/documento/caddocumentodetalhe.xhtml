@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="../template/_template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+
+	<ui:define name="conteudo">
+		<h:form id="formedit">
+			<p:messages id="message_erro" severity="error" autoUpdate="true" closable="true" />
+	   	    <p:growl id="message_info" severity="info, warn" autoUpdate="true"/>
+	   	    <div id="barratitulo">
+	   	    	Cadastro de Documento
+	   	    </div>
+	   	    <div id="formcadastro" class="ui-fluid">
+	   	    	<p:outputLabel styleClass="padrao_lbl16" value="Acervo ID: #{documento.objAcervo.id}"/>
+				<h:panelGroup id="itemPanel" layout="block" styleClass="ui-fluid">
+					<p:panelGrid columns="2" layout="grid" columnClasses="ui-grid-col4, ui-grid-col8">
+						<!-- ID. DOCUMENTO -->
+						<p:outputLabel styleClass="padrao_lbl14" value="ID:"/>
+						<p:outputLabel styleClass="padrao_txt" value="#{documentoView.documento.id}"/>
+						<br/>
+						<!-- DT. INCLUSÃO -->
+						<p:outputLabel styleClass="padrao_lbl14 larg150" value="Dt. Inclusão: " for="docu_dt_inclusao"/>
+						<p:calendar styleClass="padrao_txt larg150" id="docu_dt_inclusao" size="11" mindate="01/01/2000" maxdate="31/12/2099" readonly="true" disabled="true" locale="pt_BR" pattern="dd/MM/yyyy" value="#{documentoView.documento.docu_dt_inclusao}" />
+						<br/>
+						<!-- NOME DO DOCUMENTO -->
+						<p:outputLabel styleClass="padrao_lbl14 larg150" value="Título: " for="docu_nm_documento"/>
+						<p:inputText styleClass="padrao_txt larg370" id="docu_nm_documento" value="#{documentoView.documento.docu_nm_documento}"/>
+						<!-- CONTEÚDO -->
+						<p:outputLabel styleClass="padrao_lbl14 larg150" value="Título: " for="docu_tx_conteudo"/>
+    					<p:inputTextarea id="docu_tx_conteudo" styleClass="padrao_txt" rows="1" cols="85" counter="disp_cont" maxlength="1000" counterTemplate="{0} caracteres restantes." autoResize="false" value="#{documentoView.documento.docu_tx_conteudo}" />
+    					<h:outputText styleClass="padrao_lbl11 contador" id="disp_cont" />
+						<!-- OBSERVACAO -->
+						<p:outputLabel styleClass="padrao_lbl14 larg150" value="Observações: " for="docu_tx_observacao"/>
+    					<p:inputTextarea id="docu_tx_observacao" styleClass="padrao_txt" rows="3" cols="85" counter="disp_obs" maxlength="1000" counterTemplate="{0} caracteres restantes." autoResize="false" value="#{documentoView.documento.docu_tx_observacao}" />
+    					<h:outputText styleClass="padrao_lbl11 contador" id="disp_obs" />
+					</p:panelGrid>
+				</h:panelGroup>
+				<p:commandButton styleClass="padrao_btn" value="Salvar" action="#{documentoView.salvar()}" update="formedit"/>
+	   	    	<p:commandButton styleClass="padrao_btn" process="@this" update="@form" immediate="true" value="Cancelar" action="#{documentoView.retorna}"/>
+		   	</div>
+		</h:form>
+   	    <t:saveState value="#{documentoView.documento}"/>
+    	<t:saveState value="#{documentoView.filtro}"/>
+		<t:saveState value="#{documentoView.documentos}"/>
+	</ui:define>
+</ui:composition>

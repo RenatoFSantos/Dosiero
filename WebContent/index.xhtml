@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>.: Dosiero :.</title>
+	<link type="text/css" rel="stylesheet"
+		href="resources/css/style_dosiero.css" />
+	<link rel="icon" href="resources/img/ico_dosiero_laranja.png"></link>
+	<link href="https://fonts.googleapis.com/css?family=Crete+Round"
+		rel="stylesheet" type="text/css" />
+</h:head>
+
+<h:body styleClass="fundo">
+
+	<div class="tudo">
+		<div id="cabecalho">
+			<h:graphicImage library="img" name="logo_300.png" />
+		</div>
+		<div id="rede">
+			<h:outputLink
+				value="http://www.fb.com/cacaaotesouroeventosturisticos">
+				<h:graphicImage library="img" name="ico_facebook.png"
+					style="border: 5px solid #ffffff;" />
+			</h:outputLink>
+			<h:outputLink
+				value="http://www.fb.com/cacaaotesouroeventosturisticos">
+				<h:graphicImage library="img" name="ico_instagram.png"
+					style="border: 5px solid #ffffff;" />
+			</h:outputLink>
+			<h:outputLink
+				value="http://www.fb.com/cacaaotesouroeventosturisticos">
+				<h:graphicImage library="img" name="ico_skype.png"
+					style="border: 5px solid #ffffff;" />
+			</h:outputLink>
+		</div>
+		<!-- MENU PRINCIPAL -->
+		<h:form>
+		<div id="menu">
+			<p:menubar >
+				<p:menuitem value="QUEM SOMOS" action="#{loginView.quemsomos}"/>
+				<p:menuitem value="PRODUTOS" action="#{loginView.produtos}"/>
+				<p:menuitem value="BLOG" action="#"/>
+				<p:menuitem value="CONTATO" action="#{loginView.contato}"/>
+				<p:menuitem value="AJUDA" action="#{loginView.ajuda}"/>
+			</p:menubar>
+		</div>
+		</h:form>
+		<div id="imagemcentral">
+			<p:growl id="mensagem" sticky="false" autoUpdate="true" life="6000" />
+			<h:form id="login">
+				<p:focus for="usua_tx_login"/>
+				<h:outputLabel styleClass="padrao_lbl14" value="Usuário: "
+					for="usua_tx_login" />
+				<p:inputText styleClass="padrao_txt" id="usua_tx_login"
+					value="#{loginView.usuario.usua_tx_login}" required="true"
+					requiredMessage="Usuário obrigatório!">
+					<f:validateLength maximum="10" />
+				</p:inputText>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<h:outputLabel styleClass="padrao_lbl14" value="Senha: "
+					for="usua_tx_senha" />
+				<p:password styleClass="padrao_txt" id="usua_tx_senha"
+					value="#{loginView.usuario.usua_tx_senha}"
+					required="true" requiredMessage="Senha obrigatória!">
+					<f:validateLength maximum="10" />
+				</p:password>	
+
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<p:commandButton styleClass="padrao_btn" value="Conectar"
+					action="#{loginView.validaUsuario}" process="@form" update="" />
+			</h:form>
+		</div>
+		<div id="informa">
+			<table width="100%">
+				<tr>
+					<td width="5%"><h:graphicImage styleClass="vertalinha"
+							library="img" name="ico_informa.gif" /></td>
+					<td width="28%">
+						<h2>&nbsp;&nbsp;&nbsp;&nbsp;Portaria 1.224</h2>
+					</td>
+					<td width="5%"><h:graphicImage styleClass="vertalinha"
+							library="img" name="ico_informa.gif" /></td>
+					<td width="29%">
+						<h2>&nbsp;&nbsp;&nbsp;&nbsp;Nova Versão WEB</h2>
+					</td>
+					<td width="5%"><h:graphicImage styleClass="vertalinha"
+							library="img" name="ico_informa.gif" /></td>
+					<td width="28%">
+						<h2>&nbsp;&nbsp;&nbsp;&nbsp;GED</h2>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<p class="fonte_crete">de 18 de dezembro de 2013 institui
+							normas sobre a manutenção e guarda do Acervo Acadêmico das
+							Instituições de Educação Superior (IES) pertencentes ao Sistema
+							Federal de Ensino.</p>
+					</td>
+					<td colspan="2">
+						<p class="fonte_crete">
+							conheça as novas funcionalidades da versão web do Dosiero.<br />
+							Agora ficou muito mais fácil gerir seus documentos.
+						</p>
+					</td>
+					<td colspan="2">
+						<p class="fonte_crete">Tire todas as suas dúvidas e entenda
+							tudo sobre o assunto.</p>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<p class="saibamais">
+						    <p:commandLink action="#{loginView.portaria}">
+						        <h:outputText value="...saiba mais" style="font-size: 11px;" />
+						    </p:commandLink>							
+						</p>
+					</td>
+					<td colspan="2">
+						<p class="saibamais">
+						    <p:commandLink action="#{loginView.portaria}">
+						        <h:outputText value="...saiba mais" style="font-size: 11px;" />
+						    </p:commandLink>							
+						</p>
+					</td>
+					<td colspan="2">
+						<p class="saibamais">
+						    <p:commandLink action="#{loginView.portaria}">
+						        <h:outputText value="...saiba mais" style="font-size: 11px;" />
+						    </p:commandLink>							
+						</p>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div id="rodape">
+			<p>
+				Dosiero - Gestão Eletrônica de Documentos<br /> Contato: (21)
+				99322-3372
+			</p>
+		</div>
+	</div>
+	<p:ajaxStatus onstart="PF('statusDialog').show();" onsuccess="PF('statusDialog').hide();" />
+
+	<p:dialog styleClass="dialogo" modal="true" widgetVar="statusDialog" draggable="false" resizable="false" closable="false" showHeader="false">
+		<h:graphicImage library="img" name="ajax-loader.gif"/>
+	</p:dialog>
+</h:body>
+</html>

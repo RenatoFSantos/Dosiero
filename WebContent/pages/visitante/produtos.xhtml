@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>.: Dosiero :.</title>
+		<link type="text/css" rel="stylesheet" href="#{request.contextPath}/resources/css/style_dosiero.css" />
+		<link type="text/css" rel="stylesheet" href="#{request.contextPath}/resources/css/principal.css" />
+		<link rel="icon" href="#{request.contextPath}/resources/img/ico_dosiero_laranja.png"></link>
+		<h:outputScript  name="locale.js" library="js"></h:outputScript>
+	</h:head>
+
+	<h:body styleClass="fundo">
+		<h:form>
+			<div class="tudo">
+				<div id="imagemtoposembarra">
+					<div id="logo">
+						<h:graphicImage library="img" name="logo_300.png"/>
+					</div>
+					<div id="titulofloat">
+						Produtos
+					</div>
+				</div>
+				
+			    <p:fieldset style="margin:10px">
+			        <h:panelGrid columns="2" cellpadding="5">
+	 		            <p:graphicImage library="img" name="logo_branco.jpg" />
+			            <h:outputText
+			                value="The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
+			                His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
+			                Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, kind and benevolent to those who give respect,
+			                but given to ruthless violence whenever anything stands against the good of the family." />
+			        </h:panelGrid>
+			    </p:fieldset>				
+
+				<p:commandButton styleClass="padrao_btn" value="Retorna" action="#{loginView.login}" process="@form" update="" style="margin-left: 10px;" />
+				<div id="rodape">
+					<p>
+						Dosiero - Gestão Eletrônica de Documentos<br />
+						Contato: (21) 99322-3372
+					</p>
+				</div>
+			</div>
+		
+		</h:form>
+	</h:body>
+
+</html>

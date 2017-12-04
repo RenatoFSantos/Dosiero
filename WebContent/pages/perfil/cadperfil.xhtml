@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="../template/_template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+
+	<ui:define name="conteudo">
+		<h:form id="formlista" prependId="true">
+			<p:messages id="message_erro" severity="error" autoUpdate="true" closable="true" />
+	   	    <p:growl id="message_info" severity="info, warn" autoUpdate="true"/>
+	   	    <div id="barratitulo">
+	   	    	Cadastro de Perfil
+	   	    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	   	    	<p:outputLabel styleClass="padrao_lbl14" value="Filtrar por Nome: " for="txt_pesquisa"/>
+	   	    	<p:inputText id="txt_pesquisa" styleClass="padrao_txt" value="#{perfilView.filtro.perf_nm_perfil}" size="60"/>&nbsp;
+				<p:commandButton styleClass="padrao_btn" value="Pesquisar" action="#{perfilView.pesquisar()}" update="tbPerfils" />
+	   	    </div>
+	   	    <div>
+			    <p:dataTable id="tbPerfils" var="perf" value="#{perfilView.perfils}" rows="10" paginator="true">
+			        <p:column width="80">
+			        	<p:commandButton id="btn_editar" title="editar" action="#{perfilView.editar()}" ajax="false" icon="ui-icon-pencil">
+			        		<f:setPropertyActionListener value="#{perf}" target="#{perfilView.perfilSel}"/>
+			        	</p:commandButton>
+    					<p:commandButton id="btn_excluir" title="excluir" action="#{perfilView.excluir()}" icon="ui-icon-closethick" update="tbPerfils">
+				        	<f:setPropertyActionListener value="#{perf}" target="#{perfilView.perfilSel}"/>
+						    <p:confirm  header="Confirmação"  message="Deseja excluir este registro?"  icon="ui-icon-alert"/>
+    					</p:commandButton>
+    					<p:confirmDialog global="true" >
+						       <p:commandButton value="Sim"  type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+						       <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+					    </p:confirmDialog> 
+					    
+ 			        </p:column>			        
+			        <p:column headerText="Id" width="40" style="text-align: center;">	
+			            <h:outputText value="#{perf.id}" />
+			        </p:column>
+			        <p:column headerText="Código" width="50" style="text-align: center;">
+			            <h:outputText value="#{perf.perf_cd_perfil}"/>
+			        </p:column>
+			        <p:column headerText="Nome de Perfil">
+			            <h:outputText value="#{perf.perf_nm_perfil}" />
+			        </p:column>
+			    </p:dataTable>	   	   
+			 
+	   	    </div>
+	   	    <div id="btn_crud">
+	   	    	<p:commandButton styleClass="padrao_btn" value="Incluir" ajax="false" action="#{perfilView.inserir()}"/>
+	   	    	&nbsp;
+	   	    	<p:commandButton styleClass="padrao_btn" value="Cancelar" action="#{perfilView.retorna()}"/>
+	   	    </div>
+			<t:saveState value="#{perfilView.filtro}"/>
+	   	    <t:saveState value="#{perfilView.perfil}"/>
+	   	    <t:saveState value="#{perfilView.perfilSel}"/>
+   			<t:saveState value="#{perfilView.perfils}"/>
+		</h:form>
+	</ui:define>
+</ui:composition>

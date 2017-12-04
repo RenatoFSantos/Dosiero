@@ -1,0 +1,30 @@
+@CHARSET "ISO-8859-1";
+
+.body {
+	background: url(../img/backgroud.jpg) no-repeat top;
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	padding: 0;
+	font-family: verdana, geneva, arial, helvetica, sans-serif;
+	font-size: 15px;
+	color: #333333;
+	width: 100%;
+	font-style: normal;
+	font-variant: normal;
+	font-variant: normal;
+	font-weight: normal;
+	overflow-x: hidden;
+}
+
+.labelTitle
+{
+	
+}
+
+.menuCrud
+{
+	width: 200px;
+}
+

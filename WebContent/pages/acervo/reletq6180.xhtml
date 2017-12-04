@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="../template/_template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+
+	<ui:define name="conteudo">
+			<p:messages id="message_erro" severity="error" autoUpdate="true" closable="true" />
+	   	    <p:growl id="message_info" severity="info, warn" autoUpdate="true"/>
+	   	    <div id="barratitulo">
+	   	    	Etiquetas de Código de Barras - Pimaco 6180
+	   	    </div>
+			<h:form id="formedit" prependId="false">
+				<p:panel id="panelRel">
+					<h:panelGroup id="groupRel" layout="block" styleClass="ui-fluid" style="background-color: #ccc !important;">
+						<p:panelGrid columns="2" layout="grid" columnClasses="ui-grid-col-2, ui-grid-col-10">
+							<!-- PERIODO - DATA DE INCLUSÃO -->
+							<p:outputLabel styleClass="padrao_lbl14 larg150 lblGrid" value="Data de inclusão de: " for="dat_ini_periodo" />
+							<h:panelGroup>
+								<p:calendar styleClass="padrao_txt larg150" id="dat_ini_periodo" size="11" mindate="01/01/2000" maxdate="31/12/2099" locale="pt_BR" pattern="dd/MM/yyyy" value="#{acervoView.dat_ini_periodo}"/>
+								<p:outputLabel styleClass="padrao_lbl14" value=" até "/>
+								<p:calendar styleClass="padrao_txt larg150" id="dat_fim_periodo" size="11" mindate="01/01/2000" maxdate="31/12/2099" locale="pt_BR" pattern="dd/MM/yyyy" value="#{acervoView.dat_fim_periodo}"/>
+							</h:panelGroup>
+							<!-- PERIODO - DATA DE INCLUSÃO -->
+							<p:outputLabel styleClass="padrao_lbl14 larg150 lblGrid" value="Código Etiqueta: " for="cod_ini_etiqueta" />
+							<h:panelGroup>
+								<p:inputText styleClass="padrao_txt larg80 ate6numeros" id="cod_ini_etiqueta" value="#{acervoView.codEtqInicial}"/>
+								<p:outputLabel styleClass="padrao_lbl14" value=" até "/>
+								<p:inputText styleClass="padrao_txt larg80 ate6numeros" id="cod_fim_etiqueta" value="#{acervoView.codEtqFinal}"/>
+							</h:panelGroup>
+							<!-- MODELO DE ETIQUETAS -->
+						    <p:outputLabel styleClass="padrao_lbl14 larg150 lblGrid" value="Modelo Etiqueta: " for="opc_etq" />
+					        <p:selectOneMenu styleClass="padrao_txt" style="width: 250px;" id="opc_etq" value="#{acervoView.fmtEtq}" >
+					            <f:selectItem itemLabel="Pimaco 6180 (2,54 x 6,67cm)" itemValue="PIM_6180" />
+					        </p:selectOneMenu>
+							<!-- FORMATO RELATORIO (PDF-XLS) -->
+						    <p:outputLabel styleClass="padrao_lbl14 larg150 lblGrid" value="Formato: " for="opc_rlt" />
+					        <p:selectOneMenu styleClass="padrao_txt larg200" id="opc_rlt" value="#{acervoView.fmtRlt}" >
+					            <f:selectItem itemLabel="PDF" itemValue="PDF" />
+					            <f:selectItem itemLabel="XLS" itemValue="XLS" />
+					        </p:selectOneMenu>
+					   	</p:panelGrid>
+				 	</h:panelGroup>
+			 	</p:panel>
+		   	    <div id="btn_crud">
+		   	    	<p:commandButton styleClass="padrao_btn" value="Filtrar" ajax="false" action="#{acervoView.geraRelatorioEtq6180()}"/>
+		   	    	&nbsp;
+		   	    	<p:commandButton styleClass="padrao_btn" value="Cancelar" action="#{acervoView.retorna()}"/>
+		   	    </div>
+		   	</h:form>
+	</ui:define> 
+</ui:composition>
+ 

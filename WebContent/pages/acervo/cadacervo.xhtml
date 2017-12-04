@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="../template/_template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+
+	<ui:define name="conteudo">
+		<h:form id="formlista" prependId="true">
+			<p:messages id="message_erro" severity="error" autoUpdate="true" closable="true" />
+	   	    <p:growl id="message_info" severity="info, warn" autoUpdate="true"/>
+	   	    <div id="barratitulo">
+	   	    	Cadastro de Acervo
+	   	    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	   	    	<p:outputLabel styleClass="padrao_lbl14" value="Filtrar por Assunto: " for="txt_pesquisa"/>
+	   	    	<p:inputText id="txt_pesquisa" styleClass="padrao_txt" value="#{acervoView.filtro.acer_ds_assunto}" size="60"/>&nbsp;
+				<p:commandButton styleClass="padrao_btn" value="Pesquisar" action="#{acervoView.pesquisar()}" update="tbAcervos" />
+	   	    </div>
+	   	    <div>
+			    <p:dataTable id="tbAcervos" var="acer" value="#{acervoView.acervos}" rows="10" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom" rowsPerPageTemplate="10,20,30">
+			        <p:column width="75">
+			        	<p:commandButton id="btn_editar" title="editar" action="#{acervoView.editar()}" ajax="false" icon="ui-icon-pencil">
+			        		<f:setPropertyActionListener value="#{acer}" target="#{acervoView.acervoSel}"/>
+			        	</p:commandButton>
+    					<p:commandButton id="btn_excluir" title="excluir" action="#{acervoView.excluir()}" icon="ui-icon-closethick" update="tbAcervos">
+				        	<f:setPropertyActionListener value="#{acer}" target="#{acervoView.acervoSel}"/>
+						    <p:confirm  header="Confirmação"  message="Deseja excluir este registro?"  icon="ui-icon-alert"/>
+    					</p:commandButton>
+    					<p:confirmDialog global="true" >
+						       <p:commandButton value="Sim"  type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+						       <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+					    </p:confirmDialog> 
+					    
+ 			        </p:column>			        
+			        <p:column headerText="Id" width="60" style="text-align: center;" sortBy="#{acer.id}">	
+			            <h:outputText value="#{acer.id}" />
+			        </p:column>
+			        <p:column headerText="Classe" width="280">
+			            <h:outputText value="#{acer.objClasse.clas_ds_nome}"/>
+			        </p:column>
+			        <p:column headerText="Assunto" sortBy="#{acer.acer_ds_assunto}">
+			            <h:outputText value="#{acer.acer_ds_assunto}" />
+			        </p:column>
+			    </p:dataTable>	   	   
+			 
+	   	    </div>
+	   	    <div id="btn_crud">
+	   	    	<p:commandButton styleClass="padrao_btn" value="Incluir" ajax="false" action="#{acervoView.inserir()}"/>
+	   	    	&nbsp;
+	   	    	<p:commandButton styleClass="padrao_btn" value="Cancelar" action="#{acervoView.retorna()}"/>
+	   	    </div>
+			<t:saveState value="#{acervoView.filtro}"/>
+	   	    <t:saveState value="#{acervoView.acervo}"/>
+	   	    <t:saveState value="#{acervoView.acervoSel}"/>
+   			<t:saveState value="#{acervoView.acervos}"/>
+		</h:form>
+	</ui:define>
+</ui:composition>

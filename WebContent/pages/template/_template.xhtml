@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>.: Dosiero :.</title>
+		<link type="text/css" rel="stylesheet" href="#{request.contextPath}/resources/css/style_dosiero.css" />
+		<link type="text/css" rel="stylesheet" href="#{request.contextPath}/resources/css/principal.css" />
+		<link rel="icon" href="#{request.contextPath}/resources/img/ico_dosiero_laranja.png"></link>
+		<h:outputScript library="js" name="locale.js"/>
+		<h:outputScript library="js" name="jquery.maskMoney.js"/>
+		<h:outputScript library="js" name="jquery.numberMask.js"/>
+		<!-- SCRIPT JAVASCRIPT -->
+		<script>
+			function configurarMoeda() {
+				$(".moeda").maskMoney({ decimal:",", thousands:".", allowZero: true });
+				$('.numero').numberMask({beforePoint: 2});
+				$('.ate6numeros').numberMask({beforePoint: 6});
+			}
+			
+			$(document).ready(function() {
+				configurarMoeda();
+			});
+		</script>			
+	</h:head>
+
+	<h:body styleClass="fundo">
+		<div class="tudo">
+			<div id="imagemtopo">
+				<div id="logo">
+					<h:graphicImage library="img" name="logo_300.png"/>
+				</div>
+				<!-- MENU -->
+				<div id="menuinterno">
+					<h:form>
+						<div id="logado">
+							<table width="100%" class="padrao_lbl11">
+								<tr>
+									<td width="100px">
+										<h:graphicImage style="vertical-align: middle;" library="img" name="#{usuariologado.objCliente.clie_tx_logo}"/>
+									</td>
+									<td width="20px">
+										<h:graphicImage style="vertical-align: middle;" library="img" name="iconeusuario.jpg"/>
+									</td>
+									<td width="150px">
+										Olá #{usuariologado.usua_tx_login}!
+									</td>
+									<td>
+										Código Cliente:
+										<p:outputLabel styleClass="padrao_lbl11" value="#{usuariologado.objCliente.id}">
+											<f:convertNumber pattern="#00000" />
+										</p:outputLabel>
+										
+									</td>
+									<td>
+										<p:commandButton id="btn_desconectar" styleClass="padrao_btn" value="Desconectar" action="#{principalView.desconectaUsuario}" icon="ui-icon-circle-arrow-e">
+											<p:confirm  header="Desconectar" message="Deseja sair do sistema?"  icon="ui-icon-alert"/>
+										</p:commandButton>
+										<p:confirmDialog global="true" closeOnEscape="true" >
+									       <p:commandButton value="Sim"  type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+									       <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+									    </p:confirmDialog> 
+									</td>
+								</tr>
+							</table>
+						</div>
+
+					    <p:menubar id="menuprincipal" styleClass="menu_conexao">
+					        <p:menuitem value="Principal" ajax="false" icon="ui-icon-home" action="#{loginView.homePage()}" />
+	
+					        <p:submenu label="Cadastro" icon="ui-icon-document">
+				                <p:menuitem value="Acervo"  ajax="false" rendered="#{principalView.validaAcesso('cadacervo.xhtml')}" action="#{acervoView.listaAcervos()}"/>
+				                <p:menuitem value="Usuário"  ajax="false" rendered="#{principalView.validaAcesso('cadusuario.xhtml')}" action="#{usuarioView.listaUsuarios()}" />
+				                <p:menuitem value="Unidade"  ajax="false" action="#{unidadeView.listaUnidades()}" />
+				                <p:menuitem value="Descritor"  ajax="false" action="#{descritorView.listaDescritors()}" />
+				                <p:menuitem value="Categoria"  ajax="false" action="#{categoriaView.listaCategorias()}" />
+				                <p:menuitem value="Tipo"  ajax="false" action="#{tipoView.listaTipos()}" />
+					        </p:submenu>
+					 
+					        <p:submenu label="Empréstimo" icon="ui-icon-search">
+				                <p:menuitem value="Parâmetros" ajax="false"  action="#{categoriaTipoView.listaCategoriaTipos()}"/>
+				                <p:menuitem value="Balcão" ajax="false"  action="#{emprestimoView.balcao()}"/>
+					        </p:submenu>
+			
+					        <p:submenu label="Relatorio" icon="ui-icon-print">
+					            <p:menuitem value="Classes" ajax="false" action="#{classeView.relClasse()}" />
+					            <p:menuitem value="Acervo X Unidade" ajax="false" action="#{acervoView.relUnidade()}" />
+					            <p:menuitem value="Acervo X Digitação" ajax="false" action="#{acervoView.relDigitacao()}" />
+					            <p:menuitem value="Acervo X Classe" ajax="false" action="#{acervoView.relAcervoClasse}" />
+					            <p:menuitem value="Acervo X Local" ajax="false" action="#{acervoView.relAcervoLocal}" />
+					            <p:menuitem value="Etiquetas" ajax="false" action="#{acervoView.relEtq6180()}" />
+					            <p:menuitem value="Empréstimo X Unidade" ajax="false" action="#{emprestimoView.relEmprestimoUnidade}" />
+					        </p:submenu>
+					 
+					        <p:submenu label="Administração" icon="ui-icon-gear">
+				                <p:menuitem value="Cliente"  ajax="false" action="#{clienteView.listaClientes()}" />
+				                <p:menuitem value="Classe "  ajax="false" action="#{classeView.entrada()}" />
+				                <p:menuitem value="Página"  ajax="false" action="#{paginaView.listaPaginas()}" />
+				                <p:menuitem value="Módulo"  ajax="false" action="#{moduloView.listaModulos()}" />
+				                <p:menuitem value="Perfil"  ajax="false" action="#{perfilView.listaPerfils()}" />
+				                <p:menuitem value="Movimentação"  ajax="false" action="#{movimentacaoView.abrir_movimentacao}" />
+				                <p:menuitem value="Configuração"  ajax="false" action="#{configuracaoView.configuracao()}" />
+				                <p:menuitem value="Importação"  ajax="false" action="#{importaXLSView.abrirFormulario()}" />
+					        </p:submenu>
+
+					        <p:submenu label="Ajuda" icon="ui-icon-help">
+					            <p:menuitem value="Chamados" url="#" />
+					            <p:menuitem value="Manual" url="#" />
+					        </p:submenu>
+					 
+					    </p:menubar>
+					</h:form>
+				</div>
+			</div>
+			<!-- CONTEUDO PRINCIPAL -->
+			<div id="conteudo">
+				<ui:insert name="conteudo"></ui:insert>
+			</div>
+			
+			<div id="rodape">
+				<p>
+					Dosiero - Gestão Eletrônica de Documentos<br />
+					Contato: (21) 99322-3372
+				</p>
+			</div>			
+		</div>
+	</h:body>
+</html>
